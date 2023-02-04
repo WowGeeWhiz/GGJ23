@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Vector2 movement; //variable for not moving
     Rigidbody2D rb; //player rigidbody
     Collider2D col; //player hitbox
+    BuildingSystem buildSys; //building controls
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +27,15 @@ public class PlayerController : MonoBehaviour
         //get the components
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        buildSys = GetComponent<BuildingSystem>();
         Debug.Log("Startup Complete");
     }
 
     // Update is called once per frame
     void Update()
     {
+        canAttack = !buildSys.buildModeActive;
+
         //check for current input
         Move();
 
