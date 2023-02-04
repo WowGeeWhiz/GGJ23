@@ -12,6 +12,9 @@ public class Timer : MonoBehaviour
     bool dayTimeTimer = false;
     float currentDayTime;
     public float dayMinutes;
+    public GameObject MainSpawner;
+
+    private int roundNum;
 
     bool nightTimeTimer = false;
     float currentNightTime;
@@ -23,6 +26,8 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        roundNum = 1;
+        
         currentDayTime = dayMinutes * 60;
         StartDayTimer();
 
@@ -70,9 +75,11 @@ public class Timer : MonoBehaviour
         if (dayTimeTimer == true)
         {
             restoreNightTime(nightMinutes);
+
         }
         else
         {
+
             restoreDayTime(dayMinutes);
         }
     }
@@ -82,11 +89,15 @@ public class Timer : MonoBehaviour
     }
     public void StartDayTimer()
     {
+        MainSpawner.SendMessage("StartRound", roundNum);
+        roundNum++;
         //stopwatchActive = true;
         dayTimeTimer = true;
     }
     public void StopDayTimer()
     {
+        MainSpawner.SendMessage("CancelInvoke");
+
         //stopwatchActive = false;
         dayTimeTimer = false;
     }
