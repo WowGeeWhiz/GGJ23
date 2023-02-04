@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float spawnTime;
+    //public float spawnTime;
+    public GameObject maximum, minimum, enemy1, enemy2;
+    public float ratio;
+    //public KeyCode key;
+
     // Start is called before the first frame update
-    public GameObject maximum, minimum, enemy;
+
     void Start()
     {
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
+        //InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //if (Input.GetKeyDown(key))
+        //{
+        //    Spawn();
+        //}
     }
     void Spawn()
     {
@@ -24,6 +31,15 @@ public class EnemySpawner : MonoBehaviour
 
         Vector2 random_position = new Vector2(x, y);
 
-        Instantiate(enemy, random_position, Quaternion.identity);
+        float rand = Random.Range(0, 10);
+
+        if (rand < ratio)
+        {
+            Instantiate(enemy2, random_position, Quaternion.identity);
+        }
+        else
+        { 
+            Instantiate(enemy1, random_position, Quaternion.identity);
+        }
     }
 }
