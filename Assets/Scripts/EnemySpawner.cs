@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     //public float spawnTime;
-    public GameObject maximum, minimum, enemy1, enemy2;
+    public GameObject maximum, minimum, enemy1, enemy2, house, player;
     public float ratio;
     //public KeyCode key;
 
@@ -19,10 +20,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(key))
-        //{
-        //    Spawn();
-        //}
+
     }
     void Spawn()
     {
@@ -35,11 +33,15 @@ public class EnemySpawner : MonoBehaviour
 
         if (rand < ratio)
         {
-            Instantiate(enemy2, random_position, Quaternion.identity);
+            GameObject temp = Instantiate(enemy2, random_position, Quaternion.identity);
+            AIMovement tempAI = temp.GetComponent<AIMovement>();
+            tempAI.house = house;
         }
         else
         { 
-            Instantiate(enemy1, random_position, Quaternion.identity);
+            GameObject temp = Instantiate(enemy1, random_position, Quaternion.identity);
+            AIMovement tempAI = temp.GetComponent<AIMovement>();
+            tempAI.house = house;
         }
     }
 }

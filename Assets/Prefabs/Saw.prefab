@@ -224,6 +224,10 @@ GameObject:
   - component: {fileID: 4928223416546863714}
   m_Layer: 0
   m_Name: OuterRadius
+  - component: {fileID: 8809732816713506699}
+  - component: {fileID: 4522160161549027037}
+  m_Layer: 6
+  m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +250,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4928223416546863714
 CircleCollider2D:
+--- !u!212 &4522160161549027037
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

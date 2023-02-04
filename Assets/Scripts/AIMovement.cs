@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    private GameObject  house, canvas;
+    public GameObject house;
     private GameObject[] towers; 
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
@@ -17,14 +17,12 @@ public class AIMovement : MonoBehaviour
     float lastDamage;
     PlayerController player;
 
-    private float playerDistance, towerDistance, distaceToClosestTower, currentHealth;
+    private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
-        house = GameObject.FindGameObjectWithTag("House");
         currentHealth = health;
     }
 
@@ -45,11 +43,11 @@ public class AIMovement : MonoBehaviour
                 //Debug.Log("found closest tower");
             }
         }
-        //playerDistance = Vector2.Distance(transform.position, player.transform.position);
-        towerDistance = Vector2.Distance(transform.position, closestTower.transform.position);
-        Vector2 direction = house.transform.position - transform.position;
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
+        towerDistance = Vector2.Distance(this.transform.position, closestTower.transform.position);
+
+        //direction.Normalize();
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         //different movements
 
@@ -59,14 +57,14 @@ public class AIMovement : MonoBehaviour
         if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
         //move towards house
-        else if (Vector3.Distance(this.transform.position, house.transform.position) > stopDistanceForHouse)
+        else if (houseDistance > stopDistanceForHouse)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
 
         //player
@@ -78,7 +76,7 @@ public class AIMovement : MonoBehaviour
     }
     void TakeDamage(float damage, bool isPlayer = false)
     {
-        currentHealth = health - damage;
+        currentHealth -= damage;
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
