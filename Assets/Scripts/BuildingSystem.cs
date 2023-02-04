@@ -72,7 +72,6 @@ public class BuildingSystem : MonoBehaviour
         else if (!buildModeActive)
         {
             buildModeActive = true;
-            Debug.Log("Entering Build Mode");
 
 
             switch (structure)
@@ -86,7 +85,6 @@ public class BuildingSystem : MonoBehaviour
                     structureCost = 30;
                     break;
             }
-            Debug.Log("1");
             /*mouse cursor becomes tempObject
             */
         }
@@ -94,7 +92,6 @@ public class BuildingSystem : MonoBehaviour
 
     public void Placement(GameObject structurePrefab)
     {
-        Debug.Log("2");
         if (!validPlacement)
         {
             Debug.Log("You cannot place that here.");
@@ -109,7 +106,6 @@ public class BuildingSystem : MonoBehaviour
             {
                 //Destroy(tempObject);
                 Instantiate(structurePrefab, GetMousePos(), Quaternion.identity);
-                Debug.Log("placing " + structurePrefab.name);
             }
         }
     }
@@ -122,7 +118,6 @@ public class BuildingSystem : MonoBehaviour
 
     public void CancelBuildMode()
     {
-        Debug.Log("Exiting Build Mode");
         //cancel the build mode
         buildModeActive = false;
     }
