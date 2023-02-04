@@ -26,7 +26,7 @@ public class Flamethrower : MonoBehaviour
 
     void Start()
     {
-        damage = 1;
+        damage = 2;
 
         currentDurability = 50;
 
