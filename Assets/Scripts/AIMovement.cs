@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    private GameObject  house;
+    private GameObject  house, canvas;
     private GameObject[] towers; 
-    public float speed, attackDistance,health;
+    public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
 
@@ -21,7 +21,7 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         house = GameObject.FindGameObjectWithTag("House");
@@ -63,7 +63,7 @@ public class AIMovement : MonoBehaviour
         }
 
         //move towards house
-        else
+        else if (Vector3.Distance(this.transform.position, house.transform.position) > stopDistanceForHouse)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
@@ -84,6 +84,7 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             if (isPlayer) player.score += towerKillScore;
             else player.score += playerKillScore;
             Destroy(gameObject);
