@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Startup Complete");
 
         score = 0;
-        AddScore(0);
     }
 
     // Update is called once per frame
@@ -52,11 +51,8 @@ public class PlayerController : MonoBehaviour
         if (canAttack && Input.GetKey(KeyCode.Mouse0)) Attack();
         //if not attacking, disable the attack hitboxes
         else if (attacking) DisableAttacks();
-    }
 
-    void AddScore(float x)
-    {
-        score += x;
+
         scoreText.text = "Score: " + score.ToString();
     }
 

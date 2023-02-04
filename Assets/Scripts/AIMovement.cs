@@ -87,11 +87,9 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-
-            if (isPlayer) player.score += towerKillScore;
-            else player.score += playerKillScore;
+            if (isPlayer) player.score += playerKillScore;
+            else player.score += towerKillScore;
             Destroy(gameObject);
-
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -188,7 +188,7 @@ MonoBehaviour:
   attackDistance: 3
   health: 20
   stopDistanceForHouse: 2
-  towerKillScore: 1
+  towerKillScore: 5
   playerKillScore: 10
   ignoreTowers: 1
   damageOutput: 2
