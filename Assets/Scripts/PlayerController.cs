@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     //player variables
     public float speed, sprintModifier; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
+    public Collider2D leftUpAttack, leftDownAttack, rightUpAttack, rightDownAttack; //hitboxes for diagonal attacks
     public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
     public float damage;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     bool attacking = false; //private bool for currently attacking
-    bool movedUp, movedDown, movedLeft, movedRight; //directional bools
+    bool movedUp, movedDown, movedLeft, movedRight, movedLeftUp, movedLeftDown, movedRightUp, movedRightDown; //directional bools
     Vector2 movement; //variable for not moving
     Rigidbody2D rb; //player rigidbody
     Collider2D col; //player hitbox
@@ -67,6 +68,10 @@ public class PlayerController : MonoBehaviour
         if (!ignore.Equals("right")) rightAttack.gameObject.SetActive(false);
         if (!ignore.Equals("up")) upAttack.gameObject.SetActive(false);
         if (!ignore.Equals("down")) downAttack.gameObject.SetActive(false);
+        if (!ignore.Equals("leftUp")) leftUpAttack.gameObject.SetActive(false);
+        if (!ignore.Equals("leftDown")) leftDownAttack.gameObject.SetActive(false);
+        if (!ignore.Equals("rightUp")) rightUpAttack.gameObject.SetActive(false);
+        if (!ignore.Equals("rightDown")) rightDownAttack.gameObject.SetActive(false);
         attacking = false;
     }
 
@@ -75,10 +80,16 @@ public class PlayerController : MonoBehaviour
     {
         if (attacking) return;
         //Debug.Log("Attacked");
+
         if (movedLeft) leftAttack.gameObject.SetActive(true);
+        if (movedLeftUp) leftUpAttack.gameObject.SetActive(true);
+        if (movedLeftDown) leftDownAttack.gameObject.SetActive(true);
+        if (movedRight) rightAttack.gameObject.SetActive(true);
+        if (movedRightUp) rightUpAttack.gameObject.SetActive(true);
+        if (movedRightDown) rightDownAttack.gameObject.SetActive(true);
         if (movedUp) upAttack.gameObject.SetActive(true);
         if (movedDown) downAttack.gameObject.SetActive(true);
-        if (movedRight) rightAttack.gameObject.SetActive(true);
+        Debug.Log("Attacked but no moved is true");
         attacking = true;
     }
 
@@ -94,27 +105,63 @@ public class PlayerController : MonoBehaviour
     //set the movement Vector2 and the directional bools
     void Move()
     {
-        movement.y = Input.GetAxisRaw("Vertical");
-        if (movement.y > 0)
-        {
-            movedUp = true;
-            movedDown = movedLeft = movedRight = false;
-        }
-        else if (movement.y < 0)
-        {
-            movedDown = true;
-            movedUp = movedLeft = movedRight = false;
-        }
         movement.x = Input.GetAxisRaw("Horizontal");
-        if (movement.x > 0)
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        float y = movement.y;
+        float x = movement.x;
+
+        if (y > 0)
         {
-            movedRight = true;
-            movedUp = movedLeft = movedDown = false;
+            if (x == 0)
+            {
+                movedUp = true;
+                movedLeftUp = movedRightUp = movedDown = movedRightDown = movedLeftDown = movedRight = movedLeft = false;
+            }
+            else if (x < 0)
+            {
+                movedLeftUp = true;
+                movedUp = movedRightUp = movedDown = movedRightDown = movedLeftDown = movedRight = movedLeft = false;
+            }
+            else
+            {
+                movedRightUp = true;
+                movedUp = movedLeftUp = movedDown = movedRightDown = movedLeftDown = movedRight = movedLeft = false;
+            }
         }
-        else if (movement.x < 0)
+        else if (y < 0)
         {
-            movedLeft = true;
-            movedRight = movedDown = movedUp = false;
+            if (x == 0)
+            {
+                movedDown = true;
+                movedUp = movedLeftUp = movedRightUp = movedRightDown = movedLeftDown = movedRight = movedLeft = false;
+            }
+            else if (x < 0)
+            {
+                movedLeftDown = true;
+                movedUp = movedLeftUp = movedRightUp = movedDown = movedRightDown = movedRight = movedLeft = false;
+            }
+            else
+            {
+                movedRightDown = true;
+                movedUp = movedLeftUp = movedRightUp = movedDown = movedLeftDown = movedRight = movedLeft = false;
+            }
+        }
+        else
+        {
+            if (x > 0)
+            {
+                movedRight = true;
+                movedUp = movedLeftUp = movedRightUp = movedDown = movedRightDown = movedLeftDown = movedLeft = false;
+
+            }
+            else if (x < 0)
+            {
+                movedLeft = true;
+                movedUp = movedLeftUp = movedRightUp = movedDown = movedRightDown = movedLeftDown = movedRight = false;
+
+            }
+
         }
     }
 }
