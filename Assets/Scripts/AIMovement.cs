@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    private GameObject  house;
+    private GameObject  house, canvas;
     private GameObject[] towers; 
-    public float speed, attackDistance,health, damage;
+    public float speed, attackDistance,health, damage, points;
     public bool ignoreTowers;
 
     //floats for taking damage
@@ -20,7 +20,7 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         house = GameObject.FindGameObjectWithTag("House");
@@ -81,7 +81,11 @@ public class AIMovement : MonoBehaviour
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
-        if (currentHealth <= 0) Destroy(gameObject);
+        if (currentHealth <= 0)
+        {
+            canvas.SendMessage("AddScore", points);
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

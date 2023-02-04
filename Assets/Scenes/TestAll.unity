@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 904938188}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1430,10 +1430,10 @@ RectTransform:
   - {fileID: 48316662}
   - {fileID: 635491639}
   - {fileID: 971488973}
+  - {fileID: 1525000239}
   - {fileID: 936350654}
   - {fileID: 258113330}
   - {fileID: 2131637526}
-  - {fileID: 1525000239}
   - {fileID: 1282220438}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2189,6 +2189,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: score
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1525000241}
     - target: {fileID: 6303459839155259535, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2244,6 +2252,7 @@ GameObject:
   - component: {fileID: 1525000242}
   - component: {fileID: 1525000241}
   - component: {fileID: 1525000240}
+  - component: {fileID: 1525000243}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -2380,6 +2389,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525000238}
   m_CullTransparentMesh: 1
+--- !u!114 &1525000243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525000238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066404abd2ae29a48af0190672e3ada9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  score: 0
+  enemy: {fileID: 0}
 --- !u!1 &1537708352
 GameObject:
   m_ObjectHideFlags: 0
