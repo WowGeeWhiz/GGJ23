@@ -72,7 +72,11 @@ public class AIMovement : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+
+            if (houseDistance < attackDistance) Attack(house);
         }
+        else if (houseDistance < attackDistance) Attack(house);
+
 
         //player
         //else if (playerDistance < attackDistance)
@@ -153,29 +157,30 @@ public class AIMovement : MonoBehaviour
         bool targetIsSaw = false, targetIsFlamethrower = false, targetIsHouse = false;
         var tempSaw = Tower.GetComponent<Saw>();
         var tempFlame = Tower.GetComponent<Flamethrower>();
-        //var tempHouse = Tower.GetComponent<House>();
+        var tempHouse = house.GetComponent<HouseController>();
         if (tempSaw != null) targetIsSaw = true;
         else if (tempFlame != null) targetIsFlamethrower = true;
-        //else if (tempHouse != null) targetIsHouse = true;
+        else if (tempHouse != null) targetIsHouse = true;
 
         if (targetIsSaw)
         {
-            Saw saw = tempSaw;
-            saw.changeDurability(damageOutput);
+            Debug.Log("Enemy attacked saw");
+            Tower.GetComponent<Saw>().changeDurability(damageOutput);
+            //saw.changeDurability(damageOutput);
             lastAttack = Time.fixedTime;
             return;
         }
         if (targetIsFlamethrower)
         {
-            Flamethrower flame = tempFlame;
+            Flamethrower flame = Tower.GetComponent<Flamethrower>();
             //flame.changeDurability(damageOutput);
             lastAttack = Time.fixedTime;
             return;
         }
         if (targetIsHouse)
         {
-            //House house = tempHouse;
-            //house.changeDurability(damageOutput);
+            HouseController house = Tower.GetComponent<HouseController>();
+            house.changeDurability(damageOutput);
             lastAttack = Time.fixedTime;
             return;
         }
