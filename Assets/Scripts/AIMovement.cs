@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    private GameObject  house;
+    private GameObject  house, canvas;
     private GameObject[] towers; 
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
@@ -21,7 +21,7 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         house = GameObject.FindGameObjectWithTag("House");
@@ -84,6 +84,7 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             if (isPlayer) player.score += towerKillScore;
             else player.score += playerKillScore;
             Destroy(gameObject);
