@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float speed; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
     public Collider2D leftUpAttack, leftDownAttack, rightUpAttack, rightDownAttack; //hitboxes for diagonal attacks
-    public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
+    public bool canAttack = true, lockMovement = false; //bool on if the player can currently attack (to be set false when in build menu)
     public float damage;
 
     public float score;
@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (lockMovement)
+        {
+            movement = Vector2.zero;
+            return;
+        }
+
         canAttack = !buildSys.buildModeActive;
 
         //check for current input

@@ -1649,6 +1649,17 @@ MonoBehaviour:
   tempSelectedObject: {fileID: 0}
   sawPrefab: {fileID: 3544703991562497040, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
   flamethrowerPrefab: {fileID: 0}
+--- !u!114 &601967428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+  m_PrefabInstance: {fileID: 601967424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601967425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cb38fc73033e7499660aa2b903f114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &645122259
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,12 +2157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0
   maximum: {fileID: 1625029897}
   minimum: {fileID: 284183036}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
   house: {fileID: 2004732404}
+  player: {fileID: 0}
   ratio: 3
 --- !u!4 &796643358
 Transform:
@@ -2454,12 +2465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0
   maximum: {fileID: 760770503}
   minimum: {fileID: 1781746966}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
   house: {fileID: 2004732404}
+  player: {fileID: 0}
   ratio: 3
 --- !u!4 &867274921
 Transform:
@@ -4356,14 +4367,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc4f699e841cd84ba04ffd5d207981e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner1: {fileID: 1967275460}
-  spawner2: {fileID: 2132367980}
-  spawner3: {fileID: 796643356}
-  spawner4: {fileID: 867274919}
-  key1: 49
-  key2: 50
-  key3: 51
-  key4: 52
+  spawner:
+  - {fileID: 1967275460}
+  - {fileID: 2132367980}
+  - {fileID: 796643356}
+  - {fileID: 867274919}
+  spawnTime: 0
+  timeBetweenRounds: 0
+  roundTime: 0
 --- !u!4 &1950270445
 Transform:
   m_ObjectHideFlags: 0
@@ -4412,12 +4423,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0
   maximum: {fileID: 785198057}
   minimum: {fileID: 975673909}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
   house: {fileID: 2004732404}
+  player: {fileID: 0}
   ratio: 3
 --- !u!4 &1967275462
 Transform:
@@ -4525,6 +4536,7 @@ GameObject:
   - component: {fileID: 2004732406}
   - component: {fileID: 2004732405}
   - component: {fileID: 2004732408}
+  - component: {fileID: 2004732409}
   m_Layer: 0
   m_Name: House
   m_TagString: House
@@ -4697,6 +4709,21 @@ PolygonCollider2D:
       - {x: 0.38, y: -0.45999998}
       - {x: 0.38, y: 0.32999998}
   m_UseDelaunayMesh: 0
+--- !u!114 &2004732409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004732404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd2b7fac7dcb9c4898e1e1c5d1eb5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  player: {fileID: 601967428}
 --- !u!1 &2016489514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4858,6 +4885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1367258087}
   healthAmount: 100
+  house: {fileID: 2004732409}
 --- !u!4 &2028756210
 Transform:
   m_ObjectHideFlags: 0
@@ -5037,12 +5065,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0
   maximum: {fileID: 1387841744}
   minimum: {fileID: 1840534490}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
   house: {fileID: 2004732404}
+  player: {fileID: 0}
   ratio: 3
 --- !u!4 &2132367982
 Transform:

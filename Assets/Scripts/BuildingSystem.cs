@@ -14,6 +14,8 @@ public class BuildingSystem : MonoBehaviour
     internal bool buildModeActive;
     private bool validPlacement;
 
+    private PlayerController player;
+
     GameObject structurePrefab;
     float structureCost;
 
@@ -26,11 +28,14 @@ public class BuildingSystem : MonoBehaviour
         material = 10000; //placeholder
 
         validPlacement = true;
+        player = GetComponent<PlayerController>();
     }
 
     
     void Update()
     {
+        if (player.lockMovement) return;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             ActivateBuilding("saw");
