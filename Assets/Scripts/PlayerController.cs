@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     //set the hitboxes invisible
     private void DisableAttacks(string ignore = "")
     {
-        Debug.Log("Disabled attack hitboxes");
+        //Debug.Log("Disabled attack hitboxes");
         if (!ignore.Equals("left")) leftAttack.gameObject.SetActive(false);
         if (!ignore.Equals("right")) rightAttack.gameObject.SetActive(false);
         if (!ignore.Equals("up")) upAttack.gameObject.SetActive(false);
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         if (attacking) return;
-        Debug.Log("Attacked");
+        //Debug.Log("Attacked");
         if (movedLeft) leftAttack.gameObject.SetActive(true);
         if (movedUp) upAttack.gameObject.SetActive(true);
         if (movedDown) downAttack.gameObject.SetActive(true);

@@ -40,7 +40,7 @@ public class AIMovement : MonoBehaviour
             {
                 distaceToClosestTower = distanceToTower;
                 closestTower = currentTower;
-                Debug.Log("found closest tower");
+                //Debug.Log("found closest tower");
             }
         }
         //playerDistance = Vector2.Distance(transform.position, player.transform.position);
@@ -78,6 +78,9 @@ public class AIMovement : MonoBehaviour
     {
         currentHealth = health - damage;
         Debug.Log("enemy health: " + currentHealth);
+        lastDamage = Time.fixedTime;
+
+        if (currentHealth <= 0) Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,6 +88,20 @@ public class AIMovement : MonoBehaviour
         {
             Debug.Log("Player hit enemy");
             TakeDamage(player.damage);
+
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            if (Time.fixedTime - damageInterval >= lastDamage)
+            {
+                Debug.Log("Enemy stayed in attack");
+                TakeDamage(player.damage);
+            }
+        }
+           
     }
 }
