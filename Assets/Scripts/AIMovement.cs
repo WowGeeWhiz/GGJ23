@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -9,12 +10,18 @@ public class AIMovement : MonoBehaviour
     private GameObject[] towers; 
     public float speed, attackDistance,health;
 
+    //floats for taking damage
+    public float damageInterval;
+    float lastDamage;
+    PlayerController player;
+
     private float playerDistance, towerDistance, distaceToClosestTower, currentHealth;
     // Start is called before the first frame update
     void Start()
     {
- 
-        //player = GameObject.FindGameObjectWithTag("Player");
+
+        GameObject temp = GameObject.FindGameObjectWithTag("Player");
+        player = temp.GetComponent<PlayerController>();
         house = GameObject.FindGameObjectWithTag("House");
         currentHealth = health;
     }
@@ -54,7 +61,8 @@ public class AIMovement : MonoBehaviour
         }
 
         //move towards house
-        else {
+        else
+        {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
@@ -65,11 +73,18 @@ public class AIMovement : MonoBehaviour
         //    transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
         //    transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         //}
-
-        void TakeDamage(float damage)
+    }
+    void TakeDamage(float damage)
+    {
+        currentHealth = health - damage;
+        Debug.Log("enemy health: " + currentHealth);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
         {
-            currentHealth = health - damage;
-            Debug.Log("enemy health: " + currentHealth);
+            Debug.Log("Player hit enemy");
+            TakeDamage(player.damage);
         }
     }
 }

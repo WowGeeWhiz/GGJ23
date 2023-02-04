@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed, sprintModifier; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
     public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
+    public float damage;
     
     bool attacking = false; //private bool for currently attacking
     bool movedUp, movedDown, movedLeft, movedRight; //directional bools
