@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 249636051}
   - component: {fileID: 249636052}
   m_Layer: 6
-  m_Name: House
+  m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1386,14 +1386,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515764274}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 24.9, y: 6.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 25.355066, y: 3.7920356, z: -5.405084}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 204804288}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 679813763}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &558057828
 GameObject:
@@ -1788,6 +1788,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645122259}
   m_CullTransparentMesh: 1
+--- !u!1 &679813762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679813763}
+  m_Layer: 0
+  m_Name: Walls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &679813763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679813762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.45506585, y: 2.7079644, z: 5.405084}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1694099831}
+  - {fileID: 932555711}
+  - {fileID: 515764277}
+  - {fileID: 1781010202}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704430843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2154,7 @@ MonoBehaviour:
   minimum: {fileID: 284183036}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
+  house: {fileID: 2004732404}
   ratio: 3
 --- !u!4 &796643358
 Transform:
@@ -2425,6 +2461,7 @@ MonoBehaviour:
   minimum: {fileID: 1781746966}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
+  house: {fileID: 2004732404}
   ratio: 3
 --- !u!4 &867274921
 Transform:
@@ -2565,14 +2602,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932555708}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -14.2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.044934154, y: -16.907965, z: -5.405084}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 704430844}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 679813763}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &975673909
 GameObject:
@@ -3787,14 +3824,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694099828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 15.1, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.044934154, y: 12.392036, z: -5.405084}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1425626736}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 679813763}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700138656
 GameObject:
@@ -3962,14 +3999,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781010199}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -25.9, y: 6.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -25.444933, y: 3.7920356, z: -5.405084}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2016489515}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 679813763}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1781746966
 GameObject:
@@ -4261,6 +4298,37 @@ RectTransform:
   m_AnchoredPosition: {x: -792, y: -293}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1923842769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1923842770}
+  m_Layer: 0
+  m_Name: Tower
+  m_TagString: Tower
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1923842770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923842769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -78.5, y: 50, z: 5.1044693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950270443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4350,6 +4418,7 @@ MonoBehaviour:
   minimum: {fileID: 975673909}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
+  house: {fileID: 2004732404}
   ratio: 3
 --- !u!4 &1967275462
 Transform:
@@ -4999,6 +5068,7 @@ MonoBehaviour:
   minimum: {fileID: 1840534490}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
   enemy2: {fileID: 7928755459830868360, guid: 1f1d41a9e3d6f25448964472c4449cde, type: 3}
+  house: {fileID: 2004732404}
   ratio: 3
 --- !u!4 &2132367982
 Transform:

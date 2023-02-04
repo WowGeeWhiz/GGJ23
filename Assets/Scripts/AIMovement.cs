@@ -46,6 +46,7 @@ public class AIMovement : MonoBehaviour
         }
         houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
         towerDistance = Vector2.Distance(this.transform.position, closestTower.transform.position);
+
         //direction.Normalize();
         //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -76,7 +77,7 @@ public class AIMovement : MonoBehaviour
     }
     void TakeDamage(float damage, bool isPlayer = false)
     {
-        currentHealth = health - damage;
+        currentHealth -= damage;
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
