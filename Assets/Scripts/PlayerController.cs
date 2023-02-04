@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -18,16 +19,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move up
+        //move up if pressing up and not pressing down
         if (Input.GetKey(KeyCode.W))
         {
-            rb.transform.position =
-                new Vector3
-                (rb.transform.position.x,
-                rb.transform.position.y + Time.deltaTime * speed,
-                rb.transform.position.z);
+            if (!Input.GetKey(KeyCode.S))
+            {
+                rb.transform.position =
+                    new Vector3
+                    (rb.transform.position.x,
+                    rb.transform.position.y + Time.deltaTime * speed,
+                    rb.transform.position.z);
+            }
         }
-        //move down
+        //move down if pressing down and not pressing up
         else if (Input.GetKey(KeyCode.S))
         {
             rb.transform.position =
@@ -36,5 +40,28 @@ public class PlayerController : MonoBehaviour
                 rb.transform.position.y - Time.deltaTime * speed,
                 rb.transform.position.z);
         }
+
+        //move left if pressing left and not right
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (!Input.GetKey(KeyCode.D))
+            {
+                rb.transform.position =
+                    new Vector3
+                    (rb.transform.position.x - Time.deltaTime * speed,
+                    rb.transform.position.y,
+                    rb.transform.position.z);
+            }
+        }
+        //move right if pressing right and not left
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb.transform.position =
+                new Vector3
+                (rb.transform.position.x + Time.deltaTime * speed,
+                rb.transform.position.y,
+                rb.transform.position.z);
+        }
+
     }
 }
