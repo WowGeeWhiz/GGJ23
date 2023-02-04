@@ -186,8 +186,10 @@ MonoBehaviour:
   speed: 3
   attackDistance: 3
   health: 10
+  stopDistanceForHouse: 2
   towerKillScore: 1
   playerKillScore: 10
+  ignoreTowers: 0
   damageInterval: 1
 --- !u!58 &-2517912015181310298
 CircleCollider2D:

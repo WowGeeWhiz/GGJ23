@@ -8,7 +8,7 @@ public class AIMovement : MonoBehaviour
 {
     private GameObject  house;
     private GameObject[] towers; 
-    public float speed, attackDistance,health;
+    public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
 
@@ -63,7 +63,7 @@ public class AIMovement : MonoBehaviour
         }
 
         //move towards house
-        else
+        else if (Vector3.Distance(this.transform.position, house.transform.position) > stopDistanceForHouse)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
