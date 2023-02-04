@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tower
   - House
+  - attackBox
   layers:
   - Default
   - TransparentFX
