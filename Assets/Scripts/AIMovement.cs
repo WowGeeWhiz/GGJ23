@@ -23,7 +23,6 @@ public class AIMovement : MonoBehaviour
     {
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
-        //house = GameObject.FindGameObjectWithTag("workingHous");
         currentHealth = health;
     }
 

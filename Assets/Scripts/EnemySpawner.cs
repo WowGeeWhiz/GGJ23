@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //public float spawnTime;
+    public float spawnTime;
     public GameObject maximum, minimum, enemy1, enemy2, house;
     public float ratio;
     //public KeyCode key;
@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        //InvokeRepeating("Spawn", spawnTime, spawnTime);
+        InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
     // Update is called once per frame
