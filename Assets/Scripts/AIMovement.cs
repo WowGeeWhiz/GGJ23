@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class AIMovement : MonoBehaviour
 {
-    private GameObject  house;
+    private GameObject  house, canvas;
     private GameObject[] towers; 
-    public float speed, attackDistance,health, damage;
+    public float speed, attackDistance, health, stopDistanceForHouse;
+    public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
 
     //floats for taking damage
@@ -20,7 +21,7 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         house = GameObject.FindGameObjectWithTag("House");
@@ -62,7 +63,7 @@ public class AIMovement : MonoBehaviour
         }
 
         //move towards house
-        else
+        else if (Vector3.Distance(this.transform.position, house.transform.position) > stopDistanceForHouse)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
@@ -75,20 +76,27 @@ public class AIMovement : MonoBehaviour
         //    transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         //}
     }
-    void TakeDamage(float damage)
+    void TakeDamage(float damage, bool isPlayer = false)
     {
         currentHealth = health - damage;
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
-        if (currentHealth <= 0) Destroy(gameObject);
+        if (currentHealth <= 0)
+        {
+
+            if (isPlayer) player.score += towerKillScore;
+            else player.score += playerKillScore;
+            Destroy(gameObject);
+
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
             Debug.Log("Player hit enemy");
-            TakeDamage(player.damage);
+            TakeDamage(player.damage, true);
 
         }
     }
@@ -100,7 +108,7 @@ public class AIMovement : MonoBehaviour
             if (Time.fixedTime - damageInterval >= lastDamage)
             {
                 Debug.Log("Enemy stayed in attack");
-                TakeDamage(player.damage);
+                TakeDamage(player.damage, true);
             }
         }
            
