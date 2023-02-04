@@ -1649,6 +1649,17 @@ MonoBehaviour:
   tempSelectedObject: {fileID: 0}
   sawPrefab: {fileID: 3544703991562497040, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
   flamethrowerPrefab: {fileID: 0}
+--- !u!114 &601967428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+  m_PrefabInstance: {fileID: 601967424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601967425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cb38fc73033e7499660aa2b903f114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &645122259
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,6 +4723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  player: {fileID: 601967428}
 --- !u!1 &2016489514
 GameObject:
   m_ObjectHideFlags: 0

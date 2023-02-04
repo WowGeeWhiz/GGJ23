@@ -5,7 +5,7 @@ using UnityEngine;
 public class HouseController : MonoBehaviour
 {
     public float maxHealth, currentHealth;
-    private PlayerController player;
+    public PlayerController player;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class HouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentHealth <= 0) player.lockMovement = true;
     }
 
     public void changeDurability(float damage)
