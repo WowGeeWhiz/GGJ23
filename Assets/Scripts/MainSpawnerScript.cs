@@ -33,4 +33,9 @@ public class MainSpawnerScript : MonoBehaviour
             spawner4.SendMessage("Spawn");
         }
     }
+
+    void SelectNewRound()
+    {
+
+    }
 }

@@ -8,7 +8,8 @@ public class AIMovement : MonoBehaviour
 {
     private GameObject  house;
     private GameObject[] towers; 
-    public float speed, attackDistance,health;
+    public float speed, attackDistance,health, damage;
+    public bool ignoreTowers;
 
     //floats for taking damage
     public float damageInterval;
@@ -54,7 +55,7 @@ public class AIMovement : MonoBehaviour
 
 
         //tower
-        if (towerDistance < attackDistance)
+        if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
