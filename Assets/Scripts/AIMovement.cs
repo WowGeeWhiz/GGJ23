@@ -16,6 +16,8 @@ public class AIMovement : MonoBehaviour
     public float damageInterval;
     float lastDamage;
     PlayerController player;
+    public Flamethrower flamethrowerPrefab;
+    public Saw sawPrefab;
 
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
@@ -97,6 +99,19 @@ public class AIMovement : MonoBehaviour
             TakeDamage(player.damage, true);
 
         }
+        else if (collision.gameObject.CompareTag("sawAttackBox"))
+        {
+            Debug.Log("Saw hit enemy");
+            TakeDamage(sawPrefab.damage, true);
+
+        }
+        else if (collision.gameObject.CompareTag("fireAttackBox"))
+        {
+            Debug.Log("Fire hit enemy");
+            TakeDamage(flamethrowerPrefab.damage, true);
+
+        }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -109,6 +124,22 @@ public class AIMovement : MonoBehaviour
                 TakeDamage(player.damage, true);
             }
         }
-           
+        else if (collision.gameObject.CompareTag("sawAttackBox"))
+        {
+            if (Time.fixedTime - damageInterval >= lastDamage)
+            {
+                Debug.Log("Enemy stayed in saw");
+                TakeDamage(sawPrefab.damage, true);
+            }
+        }
+        else if (collision.gameObject.CompareTag("fireAttackBox"))
+        {
+            if (Time.fixedTime - damageInterval >= lastDamage)
+            {
+                Debug.Log("Enemy stayed in fire");
+                TakeDamage(flamethrowerPrefab.damage, true);
+            }
+        }
+
     }
 }

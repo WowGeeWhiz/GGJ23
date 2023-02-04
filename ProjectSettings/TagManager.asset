@@ -9,6 +9,8 @@ TagManager:
   - attackBox
   - Canvas
   - workingHous
+  - fireAttackBox
+  - sawAttackBox
   layers:
   - Default
   - TransparentFX
