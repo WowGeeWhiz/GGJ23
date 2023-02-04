@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 5
   maximum: {fileID: 912361837}
   minimum: {fileID: 1595493199}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
@@ -894,6 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 5
   maximum: {fileID: 593825500}
   minimum: {fileID: 534160021}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
@@ -1459,6 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 5
   maximum: {fileID: 559105132}
   minimum: {fileID: 1291816972}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}
@@ -1512,6 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61eb82e20b17c4945b5b0b1172bb9112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 5
   maximum: {fileID: 588210667}
   minimum: {fileID: 1575355619}
   enemy1: {fileID: 7928755459830868360, guid: 3bafcdaeeab854c48823523915e68f0f, type: 3}

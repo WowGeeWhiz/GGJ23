@@ -10,12 +10,13 @@ public class MainSpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(key1))
         {
             spawner1.SendMessage("Spawn");
@@ -33,6 +34,8 @@ public class MainSpawnerScript : MonoBehaviour
             spawner4.SendMessage("Spawn");
         }
     }
+
+
 
     void SelectNewRound()
     {
