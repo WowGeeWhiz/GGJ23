@@ -7,7 +7,8 @@ public class AIMovement : MonoBehaviour
 {
     private GameObject  house;
     private GameObject[] towers; 
-    public float speed, attackDistance,health;
+    public float speed, attackDistance,health, damage;
+    public bool ignoreTowers;
 
     private float playerDistance, towerDistance, distaceToClosestTower, currentHealth;
     // Start is called before the first frame update
@@ -33,7 +34,7 @@ public class AIMovement : MonoBehaviour
             {
                 distaceToClosestTower = distanceToTower;
                 closestTower = currentTower;
-                Debug.Log("found closest tower");
+                //Debug.Log("found closest tower");
             }
         }
         //playerDistance = Vector2.Distance(transform.position, player.transform.position);
@@ -47,7 +48,7 @@ public class AIMovement : MonoBehaviour
 
 
         //tower
-        if (towerDistance < attackDistance)
+        if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);

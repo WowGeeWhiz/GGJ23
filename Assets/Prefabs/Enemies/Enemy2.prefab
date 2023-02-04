@@ -99,3 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   attackDistance: 3
+  health: 0
+  ignoreTowers: 1
