@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   attackDistance: 3
-  health: 10
+  health: 20
   stopDistanceForHouse: 2
   towerKillScore: 1
   playerKillScore: 10

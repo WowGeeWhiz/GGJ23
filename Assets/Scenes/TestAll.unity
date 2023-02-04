@@ -2770,9 +2770,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6303459839155259535, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303459839603683760, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: m_TagString
+      value: attackBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303459839721873300, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: m_TagString
+      value: attackBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303459840208514585, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: m_TagString
+      value: attackBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303459840212033073, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: m_TagString
+      value: attackBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
