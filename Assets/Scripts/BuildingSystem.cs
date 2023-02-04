@@ -11,7 +11,8 @@ public class BuildingSystem : MonoBehaviour
     float material; //the amount of building material the player has
 
     //bool for if the build mode is active
-    private bool buildModeActive, validPlacement;
+    internal bool buildModeActive;
+    private bool validPlacement;
 
     GameObject structurePrefab;
     float structureCost;
