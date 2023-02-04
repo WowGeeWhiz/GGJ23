@@ -9,6 +9,7 @@ public class AIMovement : MonoBehaviour
     private GameObject  house;
     private GameObject[] towers; 
     public float speed, attackDistance,health;
+    public int towerKillScore, playerKillScore;
 
     //floats for taking damage
     public float damageInterval;
@@ -74,20 +75,26 @@ public class AIMovement : MonoBehaviour
         //    transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         //}
     }
-    void TakeDamage(float damage)
+    void TakeDamage(float damage, bool isPlayer = false)
     {
         currentHealth = health - damage;
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
-        if (currentHealth <= 0) Destroy(gameObject);
+        if (currentHealth <= 0)
+        {
+            if (isPlayer) player.score += towerKillScore;
+            else player.score += playerKillScore;
+            Destroy(gameObject);
+
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
             Debug.Log("Player hit enemy");
-            TakeDamage(player.damage);
+            TakeDamage(player.damage, true);
 
         }
     }
@@ -99,7 +106,7 @@ public class AIMovement : MonoBehaviour
             if (Time.fixedTime - damageInterval >= lastDamage)
             {
                 Debug.Log("Enemy stayed in attack");
-                TakeDamage(player.damage);
+                TakeDamage(player.damage, true);
             }
         }
            

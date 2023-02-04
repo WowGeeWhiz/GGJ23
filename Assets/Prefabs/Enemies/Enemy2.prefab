@@ -101,6 +101,8 @@ MonoBehaviour:
   speed: 5
   attackDistance: 3
   health: 10
+  towerKillScore: 1
+  playerKillScore: 10
   damageInterval: 1
 --- !u!58 &4552781516632965907
 CircleCollider2D:
