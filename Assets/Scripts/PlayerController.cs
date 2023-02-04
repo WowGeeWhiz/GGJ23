@@ -7,37 +7,48 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //player variables
-    public int speed; //player movement speed
+    public float speed, sprintModifier; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
-
+    public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
+    
     bool attacking = false; //private bool for currently attacking
     bool movedUp, movedDown, movedLeft, movedRight; //directional bools
     Vector2 movement; //variable for not moving
     Rigidbody2D rb; //player rigidbody
     Collider2D col; //player hitbox
+    BuildingSystem buildSys; //building controls
 
     // Start is called before the first frame update
     void Start()
     {
+        movedLeft = true;
         DisableAttacks(); //disable the attack hitboxes
-        //get the component
+        
+        //get the components
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        buildSys = GetComponent<BuildingSystem>();
+        Debug.Log("Startup Complete");
     }
 
     // Update is called once per frame
     void Update()
     {
+        canAttack = !buildSys.buildModeActive;
+
+        //check for current input
         Move();
 
-        if (Input.GetKey(KeyCode.Mouse0)) Attack();
+        //check for attacking
+        if (canAttack && Input.GetKey(KeyCode.Mouse0)) Attack();
+        //if not attacking, disable the attack hitboxes
         else if (attacking) DisableAttacks();
     }
 
     //set the hitboxes invisible
     private void DisableAttacks(string ignore = "")
     {
-        Debug.Log("Disabled objects");
+        Debug.Log("Disabled attack hitboxes");
         if (!ignore.Equals("left")) leftAttack.gameObject.SetActive(false);
         if (!ignore.Equals("right")) rightAttack.gameObject.SetActive(false);
         if (!ignore.Equals("up")) upAttack.gameObject.SetActive(false);
@@ -45,6 +56,7 @@ public class PlayerController : MonoBehaviour
         attacking = false;
     }
 
+    //set the hitbox visible
     private void Attack()
     {
         if (attacking) return;
@@ -58,12 +70,37 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        //apply movement Vector2 to transform at fixed rate
+        //this is for sprinting
+        if (Input.GetKey(KeyCode.LeftShift)) rb.MovePosition(rb.position + movement * speed * sprintModifier * Time.fixedDeltaTime);
+        //this is normal movement speed
+        else rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
+    //set the movement Vector2 and the directional bools
     void Move()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        if (movement.y > 0)
+        {
+            movedUp = true;
+            movedDown = movedLeft = movedRight = false;
+        }
+        else if (movement.y < 0)
+        {
+            movedDown = true;
+            movedUp = movedLeft = movedRight = false;
+        }
+        movement.x = Input.GetAxisRaw("Horizontal");
+        if (movement.x > 0)
+        {
+            movedRight = true;
+            movedUp = movedLeft = movedDown = false;
+        }
+        else if (movement.x < 0)
+        {
+            movedLeft = true;
+            movedRight = movedDown = movedUp = false;
+        }
     }
 }

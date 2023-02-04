@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 6303459839155259522}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,13 +291,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rb: {fileID: 6303459839155259520}
-  col: {fileID: 6303459839155259523}
+  sprintModifier: 0
   leftAttack: {fileID: 6303459840208514587}
   rightAttack: {fileID: 6303459839603683762}
   upAttack: {fileID: 6303459839721873303}
   downAttack: {fileID: 6303459840212033075}
-  attackHideDelay: 0
+  canAttack: 1
 --- !u!1 &6303459839603683760
 GameObject:
   m_ObjectHideFlags: 0
