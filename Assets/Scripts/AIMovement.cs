@@ -8,7 +8,8 @@ public class AIMovement : MonoBehaviour
 {
     private GameObject  house, canvas;
     private GameObject[] towers; 
-    public float speed, attackDistance,health, damage, points;
+    public float speed, attackDistance, health, stopDistanceForHouse;
+    public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
 
     //floats for taking damage
@@ -62,7 +63,7 @@ public class AIMovement : MonoBehaviour
         }
 
         //move towards house
-        else
+        else if (Vector3.Distance(this.transform.position, house.transform.position) > stopDistanceForHouse)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
@@ -75,7 +76,7 @@ public class AIMovement : MonoBehaviour
         //    transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         //}
     }
-    void TakeDamage(float damage)
+    void TakeDamage(float damage, bool isPlayer = false)
     {
         currentHealth = health - damage;
         Debug.Log("enemy health: " + currentHealth);
@@ -83,8 +84,11 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            canvas.SendMessage("AddScore", points);
+
+            if (isPlayer) player.score += towerKillScore;
+            else player.score += playerKillScore;
             Destroy(gameObject);
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,7 +96,7 @@ public class AIMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("attackBox"))
         {
             Debug.Log("Player hit enemy");
-            TakeDamage(player.damage);
+            TakeDamage(player.damage, true);
 
         }
     }
@@ -104,7 +108,7 @@ public class AIMovement : MonoBehaviour
             if (Time.fixedTime - damageInterval >= lastDamage)
             {
                 Debug.Log("Enemy stayed in attack");
-                TakeDamage(player.damage);
+                TakeDamage(player.damage, true);
             }
         }
            
