@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AIMovement : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class AIMovement : MonoBehaviour
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
+
+    //variables for attacking towers/house
+    public float damageOutput, attackDelay;
+    float lastAttack;
 
     //floats for taking damage
     public float damageInterval;
@@ -54,12 +60,11 @@ public class AIMovement : MonoBehaviour
         //different movements
 
 
-
         //tower
         if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
-            //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            Attack(closestTower);
         }
 
         //move towards house
@@ -84,11 +89,9 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-
-            if (isPlayer) player.score += towerKillScore;
-            else player.score += playerKillScore;
+            if (isPlayer) player.score += playerKillScore;
+            else player.score += towerKillScore;
             Destroy(gameObject);
-
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -142,4 +145,41 @@ public class AIMovement : MonoBehaviour
         }
 
     }
+
+    private void Attack(GameObject Tower)
+    {
+        if (Time.fixedTime < lastAttack + attackDelay) return;
+
+        bool targetIsSaw = false, targetIsFlamethrower = false, targetIsHouse = false;
+        var tempSaw = Tower.GetComponent<Saw>();
+        var tempFlame = Tower.GetComponent<Flamethrower>();
+        //var tempHouse = Tower.GetComponent<House>();
+        if (tempSaw != null) targetIsSaw = true;
+        else if (tempFlame != null) targetIsFlamethrower = true;
+        //else if (tempHouse != null) targetIsHouse = true;
+
+        if (targetIsSaw)
+        {
+            Saw saw = tempSaw;
+            saw.changeDurability(damageOutput);
+            lastAttack = Time.fixedTime;
+            return;
+        }
+        if (targetIsFlamethrower)
+        {
+            Flamethrower flame = tempFlame;
+            //flame.changeDurability(damageOutput);
+            lastAttack = Time.fixedTime;
+            return;
+        }
+        if (targetIsHouse)
+        {
+            //House house = tempHouse;
+            //house.changeDurability(damageOutput);
+            lastAttack = Time.fixedTime;
+            return;
+        }
+    }
+
+    
 }

@@ -189,8 +189,10 @@ MonoBehaviour:
   health: 10
   stopDistanceForHouse: 2
   towerKillScore: 1
-  playerKillScore: 10
+  playerKillScore: 5
   ignoreTowers: 0
+  damageOutput: 10
+  attackDelay: 2
   damageInterval: 1
   flamethrowerPrefab: {fileID: 1266343409853037975, guid: 3c0bbc632286a5440b6751d89b241217, type: 3}
   sawPrefab: {fileID: 2906340905028683409, guid: 60a68db1c582d8641b23538f06db6809, type: 3}

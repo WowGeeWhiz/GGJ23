@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //player variables
-    public float speed, sprintModifier; //player movement speed
+    public float speed; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
     public Collider2D leftUpAttack, leftDownAttack, rightUpAttack, rightDownAttack; //hitboxes for diagonal attacks
     public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Startup Complete");
 
         score = 0;
-        AddScore(0);
     }
 
     // Update is called once per frame
@@ -52,11 +51,8 @@ public class PlayerController : MonoBehaviour
         if (canAttack && Input.GetKey(KeyCode.Mouse0)) Attack();
         //if not attacking, disable the attack hitboxes
         else if (attacking) DisableAttacks();
-    }
 
-    void AddScore(float x)
-    {
-        score += x;
+
         scoreText.text = "Score: " + score.ToString();
     }
 
@@ -96,8 +92,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //apply movement Vector2 to transform at fixed rate
-        //this is for sprinting
-        if (Input.GetKey(KeyCode.LeftShift)) rb.MovePosition(rb.position + movement * speed * sprintModifier * Time.fixedDeltaTime);
+        //this is for turning without moving
+        if (Input.GetKey(KeyCode.LeftShift)) rb.MovePosition(rb.position + movement * speed * 0 * Time.fixedDeltaTime);
         //this is normal movement speed
         else rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
