@@ -191,6 +191,8 @@ MonoBehaviour:
   towerKillScore: 1
   playerKillScore: 10
   ignoreTowers: 1
+  damageOutput: 2
+  attackDelay: 1
   damageInterval: 1
 --- !u!58 &4552781516632965907
 CircleCollider2D:

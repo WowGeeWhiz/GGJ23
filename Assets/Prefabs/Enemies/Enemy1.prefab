@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52ed727e02abb24d9e7137d05f1745e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  house: {fileID: 0}
   speed: 3
   attackDistance: 3
   health: 10
@@ -190,6 +191,8 @@ MonoBehaviour:
   towerKillScore: 1
   playerKillScore: 10
   ignoreTowers: 0
+  damageOutput: 10
+  attackDelay: 2
   damageInterval: 1
 --- !u!58 &-2517912015181310298
 CircleCollider2D:
