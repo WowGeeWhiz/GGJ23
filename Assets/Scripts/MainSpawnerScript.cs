@@ -16,11 +16,6 @@ public class MainSpawnerScript : MonoBehaviour
         StartRound(1);
     }
 
-    void Print()
-    {
-        Debug.Log("still running");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -53,7 +48,5 @@ public class MainSpawnerScript : MonoBehaviour
         {
             InvokeRepeating("SpawnExtra", spawnTime, spawnTime);
         }
-        
-
     }
 }
