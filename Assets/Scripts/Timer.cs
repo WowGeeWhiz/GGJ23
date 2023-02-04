@@ -8,37 +8,100 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    bool stopwatchActive = false;
-    public float currentTime;
-    // public int startMinutes;
+    //bool stopwatchActive = false;
+    bool dayTimeTimer = false;
+    float currentDayTime;
+    public float dayMinutes;
+
+    bool nightTimeTimer = false;
+    float currentNightTime;
+    public float nightMinutes;
+
     public TextMeshProUGUI currentTimeText;
+    public TextMeshProUGUI dayOrNightText;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = 0;
-        stopwatchActive = true;
+        currentDayTime = dayMinutes * 60;
+        StartDayTimer();
+
+        nightTimeTimer = false;
+        currentNightTime = nightMinutes * 60;
+
+        dayOrNightText = FindObjectOfType<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stopwatchActive == true)
+        TimeSpan time;
+
+        if (dayTimeTimer == true)
         {
-            currentTime = currentTime + Time.deltaTime;
+            dayOrNightText.text = "Day";
+            currentDayTime -= Time.deltaTime;
+            time = TimeSpan.FromSeconds(currentDayTime);
+            if (currentDayTime <= 0)
+            {
+                StopDayTimer();
+                StartNightTimer();
+            }
         }
-        TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        //currentTimeText.text = currentTime.ToString() + ":" + time.Milliseconds.ToString();
+        else 
+        {
+            dayOrNightText.text = "Night";
+            restoreDayTime(dayMinutes);
+            currentNightTime -= Time.deltaTime;
+            time = TimeSpan.FromSeconds(currentNightTime);
+            //currentTimeText.text = time.ToString("Night Time: " + @"mm\:ss\:fff");
+            if (currentNightTime <= 0)
+            {
+                StopNightTimer();
+                StartDayTimer();
+            }
+        }
         currentTimeText.text = time.ToString(@"mm\:ss\:fff");
+        //currentTimeText.text = currentTime.ToString() + ":" + time.Milliseconds.ToString();
     }
 
-    public void StartTimer()
+    public void FixedUpdate()
     {
-        stopwatchActive = true;
+        if (dayTimeTimer == true)
+        {
+            restoreNightTime(nightMinutes);
+        }
+        else
+        {
+            restoreDayTime(dayMinutes);
+        }
+    }
+    public void restoreDayTime(float dayMinutes)
+    {
+        currentDayTime = dayMinutes * 60;
+    }
+    public void StartDayTimer()
+    {
+        //stopwatchActive = true;
+        dayTimeTimer = true;
+    }
+    public void StopDayTimer()
+    {
+        //stopwatchActive = false;
+        dayTimeTimer = false;
     }
 
-    public void StopTimer()
+
+    public void restoreNightTime(float dayMinutes) 
     {
-        stopwatchActive = false;
+        currentNightTime = nightMinutes * 60;
+    }
+    public void StartNightTimer()
+    {
+        nightTimeTimer = true;
+    }
+    public void StopNightTimer()
+    {
+        nightTimeTimer = false;
     }
 }
