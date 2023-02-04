@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,7 +11,11 @@ public class PlayerController : MonoBehaviour
     public float speed, sprintModifier; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
     public bool canAttack = true; //bool on if the player can currently attack (to be set false when in build menu)
-    
+    public float damage;
+
+    public float score;
+    public TextMeshProUGUI scoreText;
+
     bool attacking = false; //private bool for currently attacking
     bool movedUp, movedDown, movedLeft, movedRight; //directional bools
     Vector2 movement; //variable for not moving
@@ -29,6 +34,9 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider2D>();
         buildSys = GetComponent<BuildingSystem>();
         Debug.Log("Startup Complete");
+
+        score = 0;
+        AddScore(0);
     }
 
     // Update is called once per frame
@@ -45,10 +53,16 @@ public class PlayerController : MonoBehaviour
         else if (attacking) DisableAttacks();
     }
 
+    void AddScore(float x)
+    {
+        score += x;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
     //set the hitboxes invisible
     private void DisableAttacks(string ignore = "")
     {
-        Debug.Log("Disabled attack hitboxes");
+        //Debug.Log("Disabled attack hitboxes");
         if (!ignore.Equals("left")) leftAttack.gameObject.SetActive(false);
         if (!ignore.Equals("right")) rightAttack.gameObject.SetActive(false);
         if (!ignore.Equals("up")) upAttack.gameObject.SetActive(false);
@@ -60,7 +74,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         if (attacking) return;
-        Debug.Log("Attacked");
+        //Debug.Log("Attacked");
         if (movedLeft) leftAttack.gameObject.SetActive(true);
         if (movedUp) upAttack.gameObject.SetActive(true);
         if (movedDown) downAttack.gameObject.SetActive(true);
