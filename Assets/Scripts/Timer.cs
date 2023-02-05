@@ -23,6 +23,9 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI currentTimeText;
     public TextMeshProUGUI dayOrNightText;
 
+    public GameObject nightTrees, dayTrees;
+    public GameObject nightShader;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,9 @@ public class Timer : MonoBehaviour
                 StopDayTimer();
                 StartNightTimer();
             }
+            dayTrees.SetActive(true); 
+            nightTrees.SetActive(false);
+            nightShader.SetActive(false);
         }
         else 
         {
@@ -65,6 +71,9 @@ public class Timer : MonoBehaviour
                 StopNightTimer();
                 StartDayTimer();
             }
+            dayTrees.SetActive(false);
+            nightTrees.SetActive(true);
+            nightShader.SetActive(true);
         }
         currentTimeText.text = time.ToString(@"mm\:ss\:fff");
         //currentTimeText.text = currentTime.ToString() + ":" + time.Milliseconds.ToString();
