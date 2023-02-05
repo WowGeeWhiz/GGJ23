@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     //public float spawnTime;
-    public GameObject maximum, minimum, enemy1, enemy2, house, player;
+    public GameObject maximum, minimum, enemy1, enemy2, house, player, permaSaw;
     public float ratio;
     //public KeyCode key;
 
@@ -36,12 +36,15 @@ public class EnemySpawner : MonoBehaviour
             GameObject temp = Instantiate(enemy2, random_position, Quaternion.identity);
             AIMovement tempAI = temp.GetComponent<AIMovement>();
             tempAI.house = house;
+            tempAI.permaSaw = permaSaw.GetComponent<Saw>();
+            
         }
         else
         { 
             GameObject temp = Instantiate(enemy1, random_position, Quaternion.identity);
             AIMovement tempAI = temp.GetComponent<AIMovement>();
             tempAI.house = house;
+            tempAI.permaSaw = permaSaw.GetComponent<Saw>();
         }
     }
 }

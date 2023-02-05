@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2133827}
   - component: {fileID: 2133828}
+  - component: {fileID: 2133829}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -167,6 +168,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b17c99d03a485c44a51d0dbbf64d37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2133829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a80571aee21b44da780f8d393b826a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayMinutes: 5
+  MainSpawner: {fileID: 937717742}
+  nightMinutes: 1
+  currentTimeText: {fileID: 0}
+  dayOrNightText: {fileID: 0}
 --- !u!1 &48316661
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,11 +2159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d03a6e27a9e5e44d97574df26a1f3cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayMinutes: 0.5
-  MainSpawner: {fileID: 937717742}
-  nightMinutes: 0.3
-  currentTimeText: {fileID: 936350655}
-  dayOrNightText: {fileID: 727596635}
 --- !u!1 &936350653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,8 +2340,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937717742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.24, y: 3.79, z: -0.112422325}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2399902, y: 3.7899933, z: -0.11242223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

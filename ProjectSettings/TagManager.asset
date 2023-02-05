@@ -13,6 +13,7 @@ TagManager:
   - sawAttackBox
   - Enemy
   - permanentSaw
+  - BrokenTower
   layers:
   - Default
   - TransparentFX

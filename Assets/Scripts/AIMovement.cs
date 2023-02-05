@@ -23,14 +23,14 @@ public class AIMovement : MonoBehaviour
     float lastDamage;
     PlayerController player;
     public Flamethrower flamethrowerPrefab;
-    public Saw sawPrefab;
+    public Saw permaSaw;
 
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject GetSaw = GameObject.FindGameObjectWithTag("permanentSaw");
-        sawPrefab = GetSaw.GetComponent<Saw>();
+        GameObject tempSaw = GameObject.FindGameObjectWithTag("permanentSaw");
+       // permaSaw = tempSaw.GetComponent<Saw>();
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
@@ -52,10 +52,10 @@ public class AIMovement : MonoBehaviour
                 closestTower = currentTower;
                 //Debug.Log("found closest tower");
             }
-            if (distanceToTower <= sawPrefab.range)
+            if (distanceToTower <= permaSaw.range)
             {
                 var Saw = currentTower.GetComponent<Saw>();
-                if (Saw != null) TakeDamage(sawPrefab.damage);
+                if (Saw != null) TakeDamage(permaSaw.damage);
             }
         }
         houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
@@ -71,7 +71,8 @@ public class AIMovement : MonoBehaviour
         if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
-            Attack(closestTower);
+            var tempSaw = closestTower.GetComponent<Saw>();
+            if (tempSaw != null) closestTower.SendMessage("changeDurability", -damageOutput);
         }
 
         //move towards house

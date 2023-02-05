@@ -26,12 +26,19 @@ public class Saw : MonoBehaviour
         if (currentDurability <= 0) broken = true;
         else broken = false;
 
-        if (Time.fixedTime >= lastAttack + attackDelay)
+        if (!broken && Time.fixedTime >= lastAttack + attackDelay)
         {
             currentDamage = damage;
             lastAttack = Time.fixedTime;
         }
         else currentDamage = 0;
+
+        if (broken) gameObject.tag = "BrokenTower";
+        else gameObject.tag = "Tower";
+
+
+
+        if (broken) gameObject.SetActive(false);
     }
 
     public void changeDurability(float amount)
