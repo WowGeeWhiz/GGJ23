@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 4998978166770289777}
   - component: {fileID: 1475700637615848163}
   - component: {fileID: 7325332871448638015}
+  - component: {fileID: 2096841391603980308}
   m_Layer: 0
   m_Name: Flamethrower1
   m_TagString: Tower
@@ -1290,6 +1291,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2096841391603980308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984045180576778973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ded11b343757f746bca8119d7a21e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 5000
+  offset: 0
+  stationary: 1
+  bottomMarker: {x: 0, y: 0, z: 0}
 --- !u!1 &7626212893427165880
 GameObject:
   m_ObjectHideFlags: 0

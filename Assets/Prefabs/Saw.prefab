@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: -6291665077157352184}
   - component: {fileID: -1400523580046804329}
   - component: {fileID: -8227767054069464457}
+  - component: {fileID: 8827248162265927382}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Tower
@@ -748,6 +749,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8827248162265927382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544703991562497040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ded11b343757f746bca8119d7a21e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 5000
+  offset: 0
+  stationary: 1
+  bottomMarker: {x: 0, y: 0, z: 0}
 --- !u!1 &3578832348190050426
 GameObject:
   m_ObjectHideFlags: 0
