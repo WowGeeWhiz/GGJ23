@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        canAttack = !buildSys.buildModeActive;
+        canAttack = !buildSys.buildModeActive && !buildSys.removeModeActive;
 
         //check for current input
         Move();
