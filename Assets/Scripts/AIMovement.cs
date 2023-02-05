@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class AIMovement : MonoBehaviour
 {
+    Animator animator;
     public GameObject house;
     private GameObject[] towers; 
     public float speed, attackDistance, health, stopDistanceForHouse;
@@ -34,12 +35,15 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
 
         //hitpoints = maxHitpoints;
         healthBar.SetHealth(currentHealth, health);
+
+
 
     }
 
@@ -95,8 +99,13 @@ public class AIMovement : MonoBehaviour
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
             if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+            //animator.SetBool("IsMoving", false);
         }
-        else if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+        else if (houseDistance < attackDistance)
+        {
+            animator.SetBool("IsMoving", false);
+            house.SendMessage("TakeDamage", damageOutput);
+        }
 
 
         //player
