@@ -464,7 +464,7 @@ MonoBehaviour:
   playerKillScore: 10
   ignoreTowers: 1
   damageOutput: 2
-  attackDelay: 1
+  attackDelay: 5
   damageInterval: 1
   permaFlame: {fileID: 0}
   permaSaw: {fileID: 0}

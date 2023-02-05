@@ -85,7 +85,14 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
             var flame = closestTower.GetComponent<Flamethrower>();
             var saw = closestTower.GetComponent<Saw>();
-            if (flame != null || saw != null) closestTower.SendMessage("changeDurability", -damageOutput);
+            if (flame != null || saw != null)
+            {
+                if (Time.deltaTime >= lastAttack + attackDelay)
+                {
+                    closestTower.SendMessage("changeDurability", -damageOutput);
+                    lastAttack = Time.deltaTime;
+                }
+            }
         }
 
         //move towards house
@@ -94,9 +101,23 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
-            if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+            if (houseDistance < attackDistance)
+            {
+                if (Time.deltaTime <= lastAttack + attackDelay)
+                {
+                    house.SendMessage("TakeDamage", damageOutput);
+                    lastAttack = Time.deltaTime;
+                }
+            }
         }
-        else if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+        else if (houseDistance < attackDistance)
+        {
+            if (Time.deltaTime <= lastAttack + attackDelay)
+            {
+                house.SendMessage("TakeDamage", damageOutput);
+                lastAttack = Time.deltaTime;
+            }
+        }
 
 
         //player
@@ -131,7 +152,6 @@ public class AIMovement : MonoBehaviour
         }
 
     }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
