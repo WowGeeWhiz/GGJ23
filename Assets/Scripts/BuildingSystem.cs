@@ -22,11 +22,12 @@ public class BuildingSystem : MonoBehaviour
 
     public GameObject objectToPlace, tempObject, selectedObject, tempSelectedObject;
     public GameObject sawPrefab, flamethrowerPrefab;
+    public Saw permaSaw;
+    public Flamethrower permaFlame;
 
     void Start()
     {
         cam = Camera.main;
-        material = 10000; //placeholder
 
         validPlacement = true;
         player = GetComponent<PlayerController>();
@@ -35,6 +36,8 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
+        material = player.wood;
+
         if (player.lockMovement && !player.GodMode) return;
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -94,11 +97,11 @@ public class BuildingSystem : MonoBehaviour
             {
                 case "saw":
                     structurePrefab = sawPrefab;
-                    structureCost = 20;
+                    structureCost = permaSaw.cost;
                     break;
                 case "flamethrower":
                     structurePrefab = flamethrowerPrefab;
-                    structureCost = 30;
+                    structureCost = permaFlame.cost;
                     break;
             }
             /*mouse cursor becomes tempObject
@@ -122,6 +125,7 @@ public class BuildingSystem : MonoBehaviour
             {
                 //Destroy(tempObject);
                 Instantiate(structurePrefab, GetMousePos(), Quaternion.identity);
+                player.wood -= (int)structureCost;
             }
         }
     }
