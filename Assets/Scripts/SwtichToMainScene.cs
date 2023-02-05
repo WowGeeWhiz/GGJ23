@@ -15,6 +15,16 @@ public class SwtichToMainScene : MonoBehaviour
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
     }
 
+    public void playTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
+    public void playMainMenu()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
     public void playGame()
     {
         SceneManager.LoadScene("MainScene");
