@@ -34,7 +34,7 @@ public class Timer : MonoBehaviour
         nightTimeTimer = false;
         currentNightTime = nightMinutes * 60;
 
-        dayOrNightText = FindObjectOfType<TextMeshProUGUI>();
+        //dayOrNightText = FindObjectOfType<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
