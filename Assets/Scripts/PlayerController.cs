@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Attacked but no moved is true");
         attacking = true;
 
-        PlayAudio(0, 8);
+        PlayAudio(0, 7);
     }
 
     private void FixedUpdate()
@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour
             stepTimer -= Time.deltaTime;
             if (stepTimer <= 0)
             {
-                Debug.Log(movement.x + " " + movement.y);
                 stepTimer = stepDelay;
                 PlayAudio(8, 21);
             }
@@ -190,11 +189,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-    }
-
-    public void AudioLoop() 
-    {
-        
     }
 
     public void PlayAudio(int startIndex, int endIndex)
