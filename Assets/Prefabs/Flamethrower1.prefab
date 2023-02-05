@@ -1087,12 +1087,17 @@ MonoBehaviour:
   currentDamage: 0
   towerHealAmt: 20
   healDelay: 0
+  healCostInWood: 1
   broken: 0
+  repeatsPerCost: 12
   pivot: {fileID: 1638049263281165594}
   buildingRadius: {fileID: 1142679469288809804}
+  player: {fileID: 0}
   workingTower: {fileID: 4229218389534319866}
   brokenTower: {fileID: 2109306081025593134}
   healthBar: {fileID: 1762595628920052741}
+  sounds: []
+  flameCost: {fileID: 0}
 --- !u!58 &4998978166770289777
 CircleCollider2D:
   m_ObjectHideFlags: 0

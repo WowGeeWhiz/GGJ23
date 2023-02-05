@@ -557,12 +557,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
-  maxDurability: 1
+  maxDurability: 1250
   currentDurability: 0
-  range: 1
+  range: 2
   towerHealAmt: 10
-  healDelay: 0
+  healCostInWood: 1
   broken: 0
+  repeatsPerCost: 12
+  player: {fileID: 0}
   targetInRange: 0
   isSpinning: 0
   attackDelay: 1
@@ -571,6 +573,7 @@ MonoBehaviour:
   workingTower: {fileID: 2978785413404611109}
   brokenTower: {fileID: 4223860423194462503}
   healthBar: {fileID: 1959589816408903592}
+  sawCost: {fileID: 0}
 --- !u!50 &-6291665077157352184
 Rigidbody2D:
   serializedVersion: 4
