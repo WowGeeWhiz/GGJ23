@@ -101,7 +101,7 @@ public class BuildingSystem : MonoBehaviour
         {
             Debug.Log("You cannot place that here.");
         }
-        else if (validPlacement)
+        else
         {
             if (structureCost > material)
             {

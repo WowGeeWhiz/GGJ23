@@ -4,58 +4,34 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability;
+    public float cost, maxDurability, currentDurability, range;
     public bool broken;
 
     public bool targetInRange;
     public bool isSpinning;
 
-    public float damage, damageRate, damageTimer, damageDelay;
+    public float attackDelay, damage, currentDamage;
+    float lastAttack;
 
-    float innerRadius, outerRadius;
-
-    void Awake()
-    {
-        cost = 20;
-        maxDurability = 50;
-    }
+    float innerRadius = 0.1f, outerRadius = 0.5f;
 
     void Start()
     {
-        damage = 1;
-
-        currentDurability = 50;
-
-        damageTimer = 0;
-        damageDelay = 1 / damageRate;
-
-        innerRadius = 0.1f;
-        outerRadius = 0.5f;
+        currentDurability = maxDurability;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (currentDurability <= 0)
-        {
-            broken = true;
-        }
-        else if (currentDurability > 0)
-        {
-            broken = false;
-        }
+        if (currentDurability <= 0) broken = true;
+        else broken = false;
 
-        if (targetInRange && !broken)
+        if (Time.fixedTime >= lastAttack + attackDelay)
         {
-            damageTimer -= Time.deltaTime;
-            if (damageTimer <= 0)
-            {
-                damageTimer = damageDelay;
-
-                DealDamage();
-            }
+            currentDamage = damage;
+            lastAttack = Time.fixedTime;
         }
-
+        else currentDamage = 0;
     }
 
     public void changeDurability(float amount)
@@ -71,33 +47,6 @@ public class Saw : MonoBehaviour
         {
             currentDurability = 0;
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name.Contains("Enemy"))
-        {
-            changeDurability(0 - Random.Range(5, 10));
-            if (!broken)
-            {
-                targetInRange = true;
-            }
-        }
-    }
-
-    public void DealDamage()
-    {
-        //if any enemies in outer radius, enemy health = enemy health -5;
-        Collider[] enemiesInRange = Physics.OverlapSphere(this.gameObject.transform.position, outerRadius);
-        foreach (Collider col in enemiesInRange)
-        {
-            if (col.gameObject.name.Contains("Enemy"))
-            {
-                Debug.Log(damage + " Damage dealt to enemy");
-            }
-        }
-
-
     }
 
 }
