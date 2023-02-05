@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
@@ -18,9 +19,11 @@ public class Flamethrower : MonoBehaviour
     float audioTimer, audioDelay, audioRate;
     private AudioSource audioSource;
     public AudioClip[] sounds;
+    public TextMeshProUGUI flameCost;
 
     void Start()
     {
+        if (gameObject.CompareTag("permanentFlame")) flameCost.text = cost.ToString();
         currentDurability = maxDurability;
 
         healthBar.SetHealth(currentDurability, maxDurability);

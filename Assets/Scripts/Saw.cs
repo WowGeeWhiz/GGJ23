@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Saw : MonoBehaviour
@@ -19,9 +20,11 @@ public class Saw : MonoBehaviour
 
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
+    public TextMeshProUGUI sawCost;
 
     void Start()
     {
+        if (gameObject.CompareTag("permanentSaw")) sawCost.text = cost.ToString();
         currentDurability = maxDurability;
         healthBar.SetHealth(currentDurability, maxDurability);
     }
