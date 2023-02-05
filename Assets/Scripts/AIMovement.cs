@@ -56,6 +56,8 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (player.autoKillEnemies) Destroy(this.gameObject);
+
         distaceToClosestTower = Mathf.Infinity;
         GameObject closestTower = null;
         towers = GameObject.FindGameObjectsWithTag("Tower");
