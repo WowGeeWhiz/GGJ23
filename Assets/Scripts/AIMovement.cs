@@ -25,6 +25,11 @@ public class AIMovement : MonoBehaviour
     public Flamethrower flamethrowerPrefab;
     public Saw sawPrefab;
 
+    // health for enemies with slider object
+    //public float hitpoints;
+    //public float maxHitpoints;
+    public EnemyHealthBarBehavior healthBar;
+
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +37,10 @@ public class AIMovement : MonoBehaviour
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
+
+        //hitpoints = maxHitpoints;
+        healthBar.SetHealth(currentHealth, health);
+
     }
 
     // Update is called once per frame
@@ -88,6 +97,7 @@ public class AIMovement : MonoBehaviour
     void TakeDamage(float damage, bool isPlayer = false)
     {
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth, health);
         Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
