@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D leftUpAttack, leftDownAttack, rightUpAttack, rightDownAttack; //hitboxes for diagonal attacks
     public bool canAttack = true, lockMovement = false; //bool on if the player can currently attack (to be set false when in build menu)
     public float damage;
+    public bool GodMode;
 
     public float score;
     public TextMeshProUGUI scoreText;
@@ -56,13 +57,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lockMovement)
+        if (lockMovement && !GodMode)
         {
             movement = Vector2.zero;
             return;
         }
 
-        canAttack = !buildSys.buildModeActive;
+        canAttack = !buildSys.buildModeActive && !buildSys.removeModeActive;
 
         //check for current input
         Move();

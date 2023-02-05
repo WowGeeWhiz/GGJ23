@@ -86,7 +86,11 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
             var flame = closestTower.GetComponent<Flamethrower>();
             var saw = closestTower.GetComponent<Saw>();
-            if (flame != null || saw != null) closestTower.SendMessage("changeDurability", -damageOutput);
+            if (flame != null || saw != null)
+            {
+                    Debug.Log("Enemy attacked tower");
+                    closestTower.SendMessage("changeDurability", -damageOutput);
+            }
         }
 
         //move towards house
@@ -95,9 +99,23 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
-            if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+            if (houseDistance < attackDistance)
+            {
+                if (Time.deltaTime <= lastAttack + attackDelay)
+                {
+                    house.SendMessage("TakeDamage", damageOutput);
+                    lastAttack = Time.deltaTime;
+                }
+            }
         }
-        else if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+        else if (houseDistance < attackDistance)
+        {
+            if (Time.deltaTime <= lastAttack + attackDelay)
+            {
+                house.SendMessage("TakeDamage", damageOutput);
+                lastAttack = Time.deltaTime;
+            }
+        }
 
 
         //player
@@ -109,10 +127,10 @@ public class AIMovement : MonoBehaviour
     }
     public void TakeDamage(float damage, bool isPlayer = false)
     {
-        if (!isPlayer) Debug.Log($"Taking {damage} from tower");
+        //if (!isPlayer) Debug.Log($"Taking {damage} from tower");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth, health);
-        Debug.Log("enemy health: " + currentHealth);
+        //Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
         if (currentHealth <= 0)
@@ -133,7 +151,6 @@ public class AIMovement : MonoBehaviour
         }
 
     }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))

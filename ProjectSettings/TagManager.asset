@@ -14,6 +14,7 @@ TagManager:
   - Enemy
   - permanentSaw
   - permanentFlame
+  - BrokenTower
   layers:
   - Default
   - TransparentFX
