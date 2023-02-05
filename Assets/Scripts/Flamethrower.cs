@@ -10,6 +10,8 @@ public class Flamethrower : MonoBehaviour
 
     public GameObject pivot, buildingRadius;
 
+    public GameObject workingTower, brokenTower;
+
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
 
@@ -35,11 +37,18 @@ public class Flamethrower : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (currentDurability <= 0) broken = true;
+        if (currentDurability <= 0)
+        {
+            brokenTower.gameObject.SetActive(true);
+            workingTower.gameObject.SetActive(false);
+            broken = true;
+        }
         else broken = false;
 
         if (!broken)
         {
+            brokenTower.gameObject.SetActive(false);
+            workingTower.gameObject.SetActive(true);
             if (Time.fixedTime >= lastAttack + attackDelay)
             {
                 lastAttack = Time.deltaTime;

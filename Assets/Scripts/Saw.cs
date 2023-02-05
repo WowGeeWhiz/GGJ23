@@ -13,10 +13,9 @@ public class Saw : MonoBehaviour
     public float attackDelay, damage, currentDamage;
     float lastAttack, lastHeal;
 
-    float audioTimer, audioDelay, audioRate;
-    private AudioSource audioSource;
-    public AudioClip[] sounds;
+    public GameObject workingTower, brokenTower;
 
+    float innerRadius = 0.1f, outerRadius = 0.5f;
 
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
@@ -25,35 +24,29 @@ public class Saw : MonoBehaviour
     {
         currentDurability = maxDurability;
         healthBar.SetHealth(currentDurability, maxDurability);
-
-        audioSource = GetComponent<AudioSource>();
-
-        audioTimer = 0;
-        audioRate = 2f;
-        audioDelay = 1 / audioRate;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (currentDurability <= 0) broken = true;
+        if (currentDurability <= 0)
+        {
+            brokenTower.gameObject.SetActive(true);
+            workingTower.gameObject.SetActive(false);
+            broken = true;
+        }
         else broken = false;
 
         if (!broken)
         {
+            brokenTower.gameObject.SetActive(false);
+            workingTower.gameObject.SetActive(true);
             if (Time.fixedTime >= lastAttack + attackDelay)
             {
                 lastAttack = Time.deltaTime;
                 currentDamage = damage;
             }
             else currentDamage = 0;
-
-            audioTimer -= Time.deltaTime;
-            if (audioTimer <= 0)
-            {
-                audioTimer = audioDelay;
-                PlayAudio(0,4);
-            }
         }
     }
 
@@ -95,13 +88,6 @@ public class Saw : MonoBehaviour
             Debug.Log("Saw in player attackBox");
             changeDurability();
         }
-    }
-
-    public void PlayAudio(int startIndex, int endIndex)
-    {
-        int index = Random.Range(startIndex, endIndex);
-        audioSource.clip = sounds[index];
-        audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
 }
