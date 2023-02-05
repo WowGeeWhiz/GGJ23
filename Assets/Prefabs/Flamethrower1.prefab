@@ -399,14 +399,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
-  maxDurability: 100
+  maxDurability: 1000
   currentDurability: 0
   range: 3
   attackDelay: 1
   damage: 3
   currentDamage: 0
   towerHealAmt: 20
-  healDelay: 1
+  healDelay: 0
   broken: 0
   pivot: {fileID: 1638049263281165594}
   buildingRadius: {fileID: 1142679469288809804}

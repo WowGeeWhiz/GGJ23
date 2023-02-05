@@ -30,12 +30,15 @@ public class Saw : MonoBehaviour
         if (currentDurability <= 0) broken = true;
         else broken = false;
 
-        if (Time.fixedTime >= lastAttack + attackDelay)
+        if (!broken)
         {
-            currentDamage = damage;
-            lastAttack = Time.fixedTime;
+            if (Time.fixedTime >= lastAttack + attackDelay)
+            {
+                lastAttack = Time.deltaTime;
+                currentDamage = damage;
+            }
+            else currentDamage = 0;
         }
-        else currentDamage = 0;
     }
 
     public void changeDurability(float amount = 0)
@@ -50,24 +53,22 @@ public class Saw : MonoBehaviour
 
         if (amount < 0) currentDurability += amount;
 
-        if (currentDurability > maxDurability)
-        {
-            currentDurability = maxDurability;
-        }
+        if (currentDurability > maxDurability) currentDurability = maxDurability;
 
-        if (currentDurability < 0)
+        if (currentDurability <= 0)
         {
             currentDurability = 0;
+            gameObject.tag = "BrokenTower";
         }
+        else gameObject.tag = "Tower";
 
         healthBar.SetHealth(currentDurability, maxDurability);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Saw in player attackbox");
+            Debug.Log("Saw in player attackBox");
             changeDurability();
         }
     }
@@ -75,7 +76,7 @@ public class Saw : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Saw in player attackbox");
+            Debug.Log("Saw in player attackBox");
             changeDurability();
         }
     }

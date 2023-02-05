@@ -21,7 +21,7 @@ public class Flamethrower : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (currentDurability <= 0) broken = true;
         else broken = false;
@@ -35,7 +35,7 @@ public class Flamethrower : MonoBehaviour
             }
             else currentDamage = 0;
         }
-        else this.gameObject.SetActive(false);
+        //else this.gameObject.SetActive(false);
     }
 
     public void changeDurability(float amount = 0)
@@ -50,15 +50,14 @@ public class Flamethrower : MonoBehaviour
 
         if (amount < 0) currentDurability += amount;
 
-        if (currentDurability > maxDurability)
-        {
-            currentDurability = maxDurability;
-        }
+        if (currentDurability > maxDurability) currentDurability = maxDurability;
 
-        if (currentDurability < 0)
+        if (currentDurability <= 0)
         {
             currentDurability = 0;
+            gameObject.tag = "BrokenTower";
         }
+        else gameObject.tag = "Tower";
 
         healthBar.SetHealth(currentDurability, maxDurability);
     }
