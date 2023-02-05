@@ -15,7 +15,10 @@ public class Flamethrower : MonoBehaviour
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
 
+    float lastCheckedDurability;
     float audioTimer, audioDelay, audioRate;
+    float audioTimer2, audioDelay2, audioRate2;
+    float audioTimer3, audioDelay3, audioRate3;
     private AudioSource audioSource;
     public AudioClip[] sounds;
 
@@ -25,12 +28,22 @@ public class Flamethrower : MonoBehaviour
 
         healthBar.SetHealth(currentDurability, maxDurability);
 
+        lastCheckedDurability = currentDurability;
+
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = sounds[0];
 
         audioTimer = 0;
         audioRate = audioSource.clip.length;
         audioDelay = audioSource.clip.length;
+
+        audioTimer2 = 0;
+        audioRate2 = 4f;
+        audioDelay2 = 1 / audioRate2;
+
+        audioTimer3 = 0;
+        audioRate3 = 2f;
+        audioDelay3 = 1 / audioRate3;
 
     }
 
@@ -68,6 +81,27 @@ public class Flamethrower : MonoBehaviour
             audioSource.Stop();
         }
         //else this.gameObject.SetActive(false);
+
+        audioTimer2 -= Time.deltaTime;
+        audioTimer3 -= Time.deltaTime;
+
+        if (lastCheckedDurability > currentDurability)
+        {
+            if (audioTimer2 <= 0)
+            {
+                audioTimer2 = audioDelay2;
+                PlayAudio(1, 7);
+            }
+        }
+        else if (lastCheckedDurability < currentDurability)
+        {
+            if (audioTimer3 <= 0)
+            {
+                audioTimer3 = audioDelay3;
+                PlayAudio(8, 8);
+            }
+        }
+        lastCheckedDurability = currentDurability;
     }
 
     public void changeDurability(float amount = 0)
