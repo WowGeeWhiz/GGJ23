@@ -22230,6 +22230,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
+      propertyPath: woodText
+      value: 
+      objectReference: {fileID: 1718192483}
+    - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1525000241}

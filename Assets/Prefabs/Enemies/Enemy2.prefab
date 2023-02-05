@@ -441,7 +441,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7928755459830868363
@@ -464,6 +464,7 @@ MonoBehaviour:
   towerKillScore: 5
   playerKillScore: 10
   ignoreTowers: 1
+  woodAwarded: 20
   damageOutput: 1
   attackDelay: 5
   damageInterval: 1
