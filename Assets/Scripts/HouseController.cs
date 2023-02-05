@@ -13,6 +13,13 @@ public class HouseController : MonoBehaviour
     public Sprite house, damagedHouse;
     SpriteRenderer renderer;
 
+    float lastCheckedHealth;
+
+    float audioTimer, audioDelay, audioRate;
+    float audioTimer2, audioDelay2, audioRate2;
+    private AudioSource audioSource;
+    public AudioClip[] sounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +27,42 @@ public class HouseController : MonoBehaviour
         renderer.sprite = house;
         currentHealth = maxHealth;
         repeatsLeft = repeatsPerCost;
+
+        lastCheckedHealth = currentHealth;
+
+        audioSource = GetComponent<AudioSource>();
+
+        audioTimer = 0;
+        audioRate = 4f;
+        audioDelay = 1 / audioRate;
+
+        audioTimer2 = 0;
+        audioRate2 = 2f;
+        audioDelay2 = 1 / audioRate2;
+    }
+
+    void FixedUpdate()
+    {
+        audioTimer -= Time.deltaTime;
+        audioTimer2 -= Time.deltaTime;
+
+        if (lastCheckedHealth > currentHealth)
+        {
+            if (audioTimer <= 0)
+            {
+                audioTimer = audioDelay;
+                PlayAudio(0, 5);
+            }
+        }
+        else if (lastCheckedHealth < currentHealth)
+        {
+            if (audioTimer2 <= 0)
+            {
+                audioTimer2 = audioDelay2;
+                PlayAudio(6, 6);
+            }
+        }
+        lastCheckedHealth = currentHealth;
     }
 
     // Update is called once per frame
@@ -83,5 +126,12 @@ public class HouseController : MonoBehaviour
                 repeatsLeft--;
             }
         }
+    }
+
+    public void PlayAudio(int startIndex, int endIndex)
+    {
+        int index = Random.Range(startIndex, endIndex);
+        audioSource.clip = sounds[index];
+        audioSource.PlayOneShot(audioSource.clip, 0.7f);
     }
 }
