@@ -48000,7 +48000,7 @@ GameObject:
   - component: {fileID: 1228063278}
   - component: {fileID: 1228063277}
   m_Layer: 5
-  m_Name: AxeSwingCostText (1)
+  m_Name: RemoveCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57354,7 +57354,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -41.65901, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -59449,11 +59449,11 @@ PrefabInstance:
     - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: woodText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 626025047}
     - target: {fileID: 6303459839155259522, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1482233664}
     - target: {fileID: 6303459839155259535, guid: a0d551242d968be438c36d0c14557a02, type: 3}
       propertyPath: m_Name
       value: Player
@@ -59589,7 +59589,7 @@ MonoBehaviour:
   sawCursor: {fileID: 2800000, guid: 3d1effb4e2d36f84481b9052b95ace68, type: 3}
   flameCursor: {fileID: 2800000, guid: 9d4e3bc513a159c45bf99537dbb7b14d, type: 3}
   cancelCursor: {fileID: 2800000, guid: ff44ac6311ccbea4d8488b2b76585836, type: 3}
-  normalCursor: {fileID: 2800000, guid: ff44ac6311ccbea4d8488b2b76585836, type: 3}
+  normalCursor: {fileID: 2800000, guid: afc36ef21ca4ad04b93898e87893f696, type: 3}
   objectToPlace: {fileID: 0}
   tempObject: {fileID: 0}
   selectedObject: {fileID: 0}
@@ -69916,6 +69916,10 @@ PrefabInstance:
       propertyPath: cost
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2906340905028683409, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
+      propertyPath: sawCost
+      value: 
+      objectReference: {fileID: 1937073645}
     - target: {fileID: 3544703991562497040, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
       propertyPath: m_Name
       value: PermaSaw
@@ -79752,7 +79756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41.2, y: -24.000015}
+  m_AnchoredPosition: {x: -48, y: -24.000015}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937073645
@@ -79838,7 +79842,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -46.122375, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -81511,6 +81515,10 @@ PrefabInstance:
       propertyPath: cost
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 1266343409853037975, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
+      propertyPath: flameCost
+      value: 
+      objectReference: {fileID: 1435628316}
     - target: {fileID: 5045891773174364280, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

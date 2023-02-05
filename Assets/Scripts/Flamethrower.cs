@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability, range, attackDelay, damage, currentDamage, towerHealAmt, healDelay;
+    public float cost, maxDurability, currentDurability, range, attackDelay, damage, currentDamage, towerHealAmt, healCostInWood;
     public bool broken;
-    float lastAttack, lastHeal;
+    float lastAttack;
+
+    public int repeatsPerCost;
+    private int repeatsLeft;
 
     public GameObject pivot, buildingRadius;
-
+    public PlayerController player;
     public GameObject workingTower, brokenTower;
 
     // health for enemies with slider object
@@ -21,9 +25,11 @@ public class Flamethrower : MonoBehaviour
     float audioTimer3, audioDelay3, audioRate3;
     private AudioSource audioSource;
     public AudioClip[] sounds;
+    public TextMeshProUGUI flameCost;
 
     void Start()
     {
+        if (gameObject.CompareTag("permanentFlame")) flameCost.text = cost.ToString();
         currentDurability = maxDurability;
 
         healthBar.SetHealth(currentDurability, maxDurability);
@@ -108,13 +114,7 @@ public class Flamethrower : MonoBehaviour
     {
         if (amount == 0) amount = towerHealAmt;
 
-        if (amount > 0 && Time.deltaTime >= lastHeal + healDelay)
-        {
-            currentDurability += amount;
-            lastHeal = Time.deltaTime;
-        }
-
-        if (amount < 0) currentDurability += amount;
+        currentDurability += amount;
 
         if (currentDurability > maxDurability) currentDurability = maxDurability;
 
@@ -131,16 +131,34 @@ public class Flamethrower : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Flame in player attackBox");
-            changeDurability();
+            if (player.wood >= healCostInWood && currentDurability != maxDurability)
+            {
+
+                if (repeatsLeft <= 0)
+                {
+                    repeatsLeft = repeatsPerCost;
+                    player.wood -= (int)healCostInWood;
+                }
+                changeDurability();
+                repeatsLeft--;
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Flame in player attackBox");
-            changeDurability();
+            if (player.wood >= healCostInWood && currentDurability != maxDurability)
+            {
+
+                if (repeatsLeft <= 0)
+                {
+                    repeatsLeft = repeatsPerCost;
+                    player.wood -= (int)healCostInWood;
+                }
+                changeDurability();
+                repeatsLeft--;
+            }
         }
     }
 
@@ -152,3 +170,4 @@ public class Flamethrower : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 }
+
