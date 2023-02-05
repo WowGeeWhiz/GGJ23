@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 529e88dba2dd7f8458bebcbf4962312c
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 346526bfd5cbb6d4eac48a2e462ba92c
+    path: Assets/Scenes/EthanMain.unity
+    guid: 11b59fa554a26b54097a03c43a7fdc51
   - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
     guid: 1803be985db89f44c9fad363bb5c7ec5

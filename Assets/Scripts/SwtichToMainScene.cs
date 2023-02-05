@@ -27,7 +27,7 @@ public class SwtichToMainScene : MonoBehaviour
 
     public void playGame()
     {
-        SceneManager.LoadScene("EthanScene");
+        SceneManager.LoadScene("EthanMain");
     }
 
     public void playCredits()
