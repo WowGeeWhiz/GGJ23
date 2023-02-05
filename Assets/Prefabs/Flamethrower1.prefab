@@ -1093,6 +1093,7 @@ MonoBehaviour:
   workingTower: {fileID: 4229218389534319866}
   brokenTower: {fileID: 2109306081025593134}
   healthBar: {fileID: 1762595628920052741}
+  sounds: []
 --- !u!58 &4998978166770289777
 CircleCollider2D:
   m_ObjectHideFlags: 0
