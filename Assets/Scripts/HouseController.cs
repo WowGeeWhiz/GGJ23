@@ -16,10 +16,10 @@ public class HouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (currentHealth <= 0) player.lockMovement = true;
+        if (currentHealth <= 0) player.lockMovement = true;
     }
 
-    public void changeDurability(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth > maxHealth) currentHealth = maxHealth;

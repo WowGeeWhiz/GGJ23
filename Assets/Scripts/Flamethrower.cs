@@ -4,41 +4,18 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability;
+    public float cost, maxDurability, currentDurability, range, attackDelay, damage, currentDamage;
     public bool broken;
-
-    public bool targetInRange;
-
-    public float damage, damageRate, damageTimer, damageDelay;
-
-    float innerRadius, outerRadius;
+    float lastAttack;
 
     public GameObject pivot, buildingRadius;
-    public Collider2D fireArea;
-
-    private GameObject target;
 
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
 
-    void Awake()
-    {
-        cost = 20;
-        maxDurability = 50;
-        currentDurability = 50;
-    }
-
     void Start()
     {
-        damage = 2;
-
-        currentDurability = 50;
-
-        damageTimer = 0;
-        damageDelay = 1 / damageRate;
-
-        innerRadius = 0.1f;
-        outerRadius = 3f;
+        currentDurability = maxDurability;
 
         healthBar.SetHealth(currentDurability, maxDurability);
     }
@@ -46,34 +23,19 @@ public class Flamethrower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentDurability <= 0)
-        {
-            broken = true;
-        }
-        else if (currentDurability > 0)
-        {
-            broken = false;
-        }
+        if (currentDurability <= 0) broken = true;
+        else broken = false;
 
-        if (target != null && !broken)
+        if (!broken)
         {
-            Debug.Log("1");
-            damageTimer -= Time.deltaTime;
-
-            if (targetInRange)
+            if (Time.fixedTime >= lastAttack + attackDelay)
             {
-                Debug.Log("2");
-                //pivot rotate to look at target
-
-                if (damageTimer <= 0)
-                {
-                    damageTimer = damageDelay;
-
-                }
+                lastAttack = Time.deltaTime;
+                currentDamage = damage;
             }
+            else currentDamage = 0;
         }
-
-
+        else this.gameObject.SetActive(false);
     }
 
     public void changeDurability(float amount)
@@ -91,31 +53,6 @@ public class Flamethrower : MonoBehaviour
         }
 
         healthBar.SetHealth(currentDurability, maxDurability);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name.Contains("Enemy"))
-        {
-            changeDurability(0 - Random.Range(5, 10));
-            if (!broken)
-            {
-                targetInRange = true;
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider c)
-    {
-        if (gameObject != null)
-        {
-            if (c.gameObject.name.Contains("Enemy"))
-            {
-                targetInRange = true;
-                target = c.gameObject;
-            }
-        }
-
     }
 
    
