@@ -42,7 +42,7 @@ public class SwtichToMainScene : MonoBehaviour
 
     public void QuitGame()
     {
-        EditorApplication.ExitPlaymode();
+        //EditorApplication.ExitPlaymode();
         Application.Quit();
     }
 }

@@ -82,6 +82,7 @@ public class HouseController : MonoBehaviour
             if (player.score > PlayerPrefs.GetFloat("highscore")) PlayerPrefs.SetFloat("highscore", player.score);
             if (!hasPlayedDeath)
             {
+
                 hasPlayedDeath = true;
                 player.PlayDeath();
                 if (player.score > PlayerPrefs.GetFloat("highscore"))
@@ -93,13 +94,13 @@ public class HouseController : MonoBehaviour
                     hasPlayedDeath = true;
                     player.PlayDeath();
                 }
-                else
+                else if (!HasPlayedRespawn)
                 {
                     player.PlayRespawn();
                 }
 
 
-            else if (!HasPlayedRespawn)
+                else if (!HasPlayedRespawn)
                 {
                     player.PlayRespawn();
                     HasPlayedRespawn = true;

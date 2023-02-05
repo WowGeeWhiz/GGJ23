@@ -21788,6 +21788,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2cca707f979a8de4787dfae93ec62fd0, type: 3}
   - {fileID: 8300000, guid: 04d364e43dd63ca489ba90f023901756, type: 3}
   - {fileID: 8300000, guid: 41156bdbaee1e6f4b918186c1a4751a4, type: 3}
+  HasPlayedRespawn: 0
 --- !u!60 &585479966
 PolygonCollider2D:
   m_ObjectHideFlags: 0
