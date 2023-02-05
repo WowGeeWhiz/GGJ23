@@ -29,7 +29,7 @@ public class Flamethrower : MonoBehaviour
 
     void Start()
     {
-        if (gameObject.CompareTag("permanentFlame")) flameCost.text = cost.ToString();
+        //if (gameObject.CompareTag("permanentFlame")) flameCost.text = cost.ToString();
         currentDurability = maxDurability;
 
         healthBar.SetHealth(currentDurability, maxDurability);
@@ -84,7 +84,7 @@ public class Flamethrower : MonoBehaviour
         }
         else if (broken)
         {
-            audioSource.Stop();
+            //audioSource.Stop();
         }
         //else this.gameObject.SetActive(false);
 
