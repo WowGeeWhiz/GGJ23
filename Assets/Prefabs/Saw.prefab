@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 2906340905028683409}
   - component: {fileID: -6291665077157352184}
   - component: {fileID: -1400523580046804329}
+  - component: {fileID: -8227767054069464457}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Tower
@@ -568,6 +569,21 @@ MonoBehaviour:
   attackDelay: 1
   damage: 1
   currentDamage: 0
+  sounds:
+  - {fileID: 8300000, guid: 992bb87de6588a346a38d6f73f0a5445, type: 3}
+  - {fileID: 8300000, guid: 3561230024b11ee4da2ed6fd4c34e105, type: 3}
+  - {fileID: 8300000, guid: 77642bef1a3e8094f871f6a7bd844866, type: 3}
+  - {fileID: 8300000, guid: 563224773fab46b4fb33f7dfa0b1c95d, type: 3}
+  - {fileID: 8300000, guid: 8551fa60410bf6c42be0611c0a58a5ad, type: 3}
+  - {fileID: 8300000, guid: bb7dcacd1e6c6f845a36a3b562aa025b, type: 3}
+  - {fileID: 8300000, guid: 291e26782475c1d43813985bb4e21a8c, type: 3}
+  - {fileID: 8300000, guid: e49b0a315648b1648903671eabd82329, type: 3}
+  - {fileID: 8300000, guid: 0402146b89dc3b04abdc275265d6914e, type: 3}
+  - {fileID: 8300000, guid: 6d763271ff9b93741a3a3b1b12f229e0, type: 3}
+  - {fileID: 8300000, guid: cfcf4d609348c5145916657b12081dc7, type: 3}
+  - {fileID: 8300000, guid: 2e82a78328e479b44ac5f5a0228bd7c5, type: 3}
+  - {fileID: 8300000, guid: 0df67e487d908ce408eec08caacb73fe, type: 3}
+  - {fileID: 8300000, guid: 41156bdbaee1e6f4b918186c1a4751a4, type: 3}
   workingTower: {fileID: 2978785413404611109}
   brokenTower: {fileID: 4223860423194462503}
   healthBar: {fileID: 1959589816408903592}
@@ -633,6 +649,102 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!82 &-8227767054069464457
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544703991562497040}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3578832348190050426
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,13 @@ public class Saw : MonoBehaviour
     public float attackDelay, damage, currentDamage;
     float lastAttack, lastHeal;
 
+    float lastCheckedDurability;
+    float audioTimer, audioDelay, audioRate;
+    float audioTimer2, audioDelay2, audioRate2;
+    float audioTimer3, audioDelay3, audioRate3;
+    private AudioSource audioSource;
+    public AudioClip[] sounds;
+
     public GameObject workingTower, brokenTower;
 
     float innerRadius = 0.1f, outerRadius = 0.5f;
@@ -24,6 +31,22 @@ public class Saw : MonoBehaviour
     {
         currentDurability = maxDurability;
         healthBar.SetHealth(currentDurability, maxDurability);
+
+        lastCheckedDurability = currentDurability;
+
+        audioSource = GetComponent<AudioSource>();
+
+        audioTimer = 0;
+        audioRate = 2f;
+        audioDelay = 1 / audioRate;
+
+        audioTimer2 = 0;
+        audioRate2 = 4f;
+        audioDelay2 = 1 / audioRate2;
+
+        audioTimer3 = 0;
+        audioRate3 = 2f;
+        audioDelay3 = 1 / audioRate3;
     }
 
     // Update is called once per frame
@@ -47,6 +70,35 @@ public class Saw : MonoBehaviour
                 currentDamage = damage;
             }
             else currentDamage = 0;
+
+            audioTimer -= Time.deltaTime;
+            if (audioTimer <= 0)
+            {
+                audioTimer = audioDelay;
+                PlayAudio(0, 4);
+            }
+
+            audioTimer2 -= Time.deltaTime;
+            audioTimer3 -= Time.deltaTime;
+
+            if (lastCheckedDurability > currentDurability)
+            {
+                if (audioTimer2 <= 0)
+                {
+                    audioTimer2 = audioDelay2;
+                    PlayAudio(5, 12);
+                }
+            }
+            else if (lastCheckedDurability < currentDurability)
+            {
+                if (audioTimer3 <= 0)
+                {
+                    audioTimer3 = audioDelay3;
+                    PlayAudio(13, 13);
+                }
+            }
+            lastCheckedDurability = currentDurability;
+
         }
     }
 
@@ -88,6 +140,13 @@ public class Saw : MonoBehaviour
             Debug.Log("Saw in player attackBox");
             changeDurability();
         }
+    }
+
+    public void PlayAudio(int startIndex, int endIndex)
+    {
+        int index = Random.Range(startIndex, endIndex);
+        audioSource.clip = sounds[index];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
 
 }
