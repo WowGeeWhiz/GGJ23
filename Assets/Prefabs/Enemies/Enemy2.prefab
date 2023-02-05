@@ -459,7 +459,7 @@ MonoBehaviour:
   speed: 5
   attackDistance: 3
   health: 50
-  stopDistanceForHouse: 2
+  stopDistanceForHouse: 6
   towerKillScore: 5
   playerKillScore: 10
   ignoreTowers: 1

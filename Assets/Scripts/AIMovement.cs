@@ -98,6 +98,7 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
+            /*
             if (houseDistance < attackDistance)
             {
                 if (Time.deltaTime <= lastAttack + attackDelay)
@@ -106,8 +107,9 @@ public class AIMovement : MonoBehaviour
                     lastAttack = Time.deltaTime;
                 }
             }
+            */
         }
-        else if (houseDistance < attackDistance)
+        else if (houseDistance < stopDistanceForHouse)
         {
             if (Time.deltaTime <= lastAttack + attackDelay)
             {
