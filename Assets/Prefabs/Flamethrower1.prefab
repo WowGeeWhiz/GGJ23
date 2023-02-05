@@ -399,17 +399,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
-  maxDurability: 0
+  maxDurability: 100
   currentDurability: 0
+  range: 3
+  attackDelay: 1
+  damage: 3
+  currentDamage: 0
   broken: 0
-  targetInRange: 0
-  damage: 0
-  damageRate: 0
-  damageTimer: 0
-  damageDelay: 0
   pivot: {fileID: 1638049263281165594}
   buildingRadius: {fileID: 1142679469288809804}
-  fireArea: {fileID: 5007965563622047892}
   healthBar: {fileID: 1762595628920052741}
 --- !u!58 &4998978166770289777
 CircleCollider2D:
@@ -595,12 +593,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7820565165746855666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddc11f53e13d324aa4a732a6bab0556, type: 3}
+  m_Script: {fileID: 11500000, guid: 775c9061a2597374a8ca7da6426ac66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 970856306085046862}
-  low: {r: 1, g: 0, b: 0, a: 1}
-  high: {r: 0.113589525, g: 1, b: 0, a: 1}
+  low: {r: 1, g: 0, b: 0, a: 0.8039216}
+  high: {r: 0, g: 1, b: 0.029061556, a: 0.91764706}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &8195628491343249795
 GameObject:

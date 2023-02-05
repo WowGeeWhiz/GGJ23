@@ -22,8 +22,8 @@ public class AIMovement : MonoBehaviour
     public float damageInterval;
     float lastDamage;
     PlayerController player;
-    public Flamethrower flamethrowerPrefab;
-    public Saw sawPrefab;
+    public Flamethrower permaFlame;
+    public Saw permaSaw;
 
     // health for enemies with slider object
     //public float hitpoints;
@@ -34,8 +34,6 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject GetSaw = GameObject.FindGameObjectWithTag("permanentSaw");
-        sawPrefab = GetSaw.GetComponent<Saw>();
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
@@ -61,10 +59,15 @@ public class AIMovement : MonoBehaviour
                 closestTower = currentTower;
                 //Debug.Log("found closest tower");
             }
-            if (distanceToTower <= sawPrefab.range)
+            if (distanceToTower <= permaSaw.range)
             {
                 var Saw = currentTower.GetComponent<Saw>();
-                if (Saw != null) TakeDamage(sawPrefab.damage);
+                if (Saw != null) TakeDamage(permaSaw.damage);
+            }
+            if (distanceToTower <= permaFlame.range)
+            {
+                var Flame = currentTower.GetComponent<Flamethrower>();
+                if (Flame != null) TakeDamage(permaFlame.damage);
             }
         }
         houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
@@ -80,7 +83,9 @@ public class AIMovement : MonoBehaviour
         if (towerDistance < attackDistance && !ignoreTowers)
         {
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
-            Attack(closestTower);
+            var flame = closestTower.GetComponent<Flamethrower>();
+            var saw = closestTower.GetComponent<Saw>();
+            if (flame != null || saw != null) closestTower.SendMessage("changeDurability", -damageOutput);
         }
 
         //move towards house
@@ -89,9 +94,9 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
-            if (houseDistance < attackDistance) Attack(house);
+            if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
         }
-        else if (houseDistance < attackDistance) Attack(house);
+        else if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
 
 
         //player
@@ -124,12 +129,6 @@ public class AIMovement : MonoBehaviour
             TakeDamage(player.damage, true);
 
         }
-        if (collision.gameObject.CompareTag("fireAttackBox"))
-        {
-            Debug.Log("Fire hit enemy");
-            TakeDamage(flamethrowerPrefab.damage);
-
-        }
 
     }
 
@@ -143,51 +142,7 @@ public class AIMovement : MonoBehaviour
                 TakeDamage(player.damage, true);
             }
         }
-        if (collision.gameObject.CompareTag("fireAttackBox"))
-        {
-            if (Time.fixedTime - damageInterval >= lastDamage)
-            {
-                Debug.Log("Enemy stayed in fire");
-                TakeDamage(flamethrowerPrefab.damage);
-            }
-        }
 
-    }
-
-    private void Attack(GameObject Tower)
-    {
-        if (Time.fixedTime < lastAttack + attackDelay) return;
-
-        bool targetIsSaw = false, targetIsFlamethrower = false, targetIsHouse = false;
-        var tempSaw = Tower.GetComponent<Saw>();
-        var tempFlame = Tower.GetComponent<Flamethrower>();
-        var tempHouse = house.GetComponent<HouseController>();
-        if (tempSaw != null) targetIsSaw = true;
-        else if (tempFlame != null) targetIsFlamethrower = true;
-        else if (tempHouse != null) targetIsHouse = true;
-
-        if (targetIsSaw)
-        {
-            //Debug.Log("Enemy attacked saw");
-            Tower.GetComponent<Saw>().changeDurability(damageOutput);
-            //saw.changeDurability(damageOutput);
-            lastAttack = Time.fixedTime;
-            return;
-        }
-        if (targetIsFlamethrower)
-        {
-            Flamethrower flame = Tower.GetComponent<Flamethrower>();
-            flame.changeDurability(damageOutput);
-            lastAttack = Time.fixedTime;
-            return;
-        }
-        if (targetIsHouse)
-        {
-            HouseController house = Tower.GetComponent<HouseController>();
-            house.changeDurability(damageOutput);
-            lastAttack = Time.fixedTime;
-            return;
-        }
     }
 
     
