@@ -32,6 +32,10 @@ public class AIMovement : MonoBehaviour
     //public float maxHitpoints;
     public HealthBarBehavior healthBar;
 
+    float audioTimer, audioDelay, audioRate;
+    private AudioSource audioSource;
+    public AudioClip[] sounds;
+
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
     void Start()
