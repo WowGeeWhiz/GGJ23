@@ -78,6 +78,9 @@ public class HouseController : MonoBehaviour
         {
             player.lockMovement = true;
             renderer.sprite = damagedHouse;
+            if (player.score > PlayerPrefs.GetFloat("highscore"))
+            {
+                PlayerPrefs.SetFloat("highscore", player.score);
             if (!hasPlayedDeath)
             {
                 hasPlayedDeath = true;
