@@ -72,10 +72,14 @@ public class AIMovement : MonoBehaviour
                 if (tempSaw != null)
                 {
                     tempSaw.BreakThis();
+                    player.cinemEnables.Add(currentTower);
+                    currentTower.SetActive(false);
                 }
                 if (tempFlame != null)
                 {
                     tempFlame.BreakThis();
+                    player.cinemEnables.Add(currentTower);
+                    currentTower.SetActive(false);
                 }
             }
             else

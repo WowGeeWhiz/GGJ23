@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer playerSprite;
     public VideoClip spawn, death, respawn;
     public VideoPlayer vp;
+    private bool wasRespawn;
+
+    public bool reset;
+
     //player variables
     Animator animator;
     public float speed; //player movement speed
@@ -25,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public bool GodMode;
     private bool hasRestored;
     private float restoreAt;
-    public GameObject[] cinemEnables;
+    public List<GameObject> cinemEnables;
 
     public bool autoKillEnemies = false;
 
@@ -88,6 +92,7 @@ public class PlayerController : MonoBehaviour
             vp.clip = null;
             hasRestored = true;
             canvasTimer.enabled = false;
+            if (wasRespawn) PlaySpawn();
         }
 
 
@@ -247,6 +252,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlaySpawn()
     {
+        buttonsForRespawn.SetActive(false);
+        wasRespawn = false;
         canvasTimer.enabled = false;
         autoKillEnemies = false;
         lockMovement = true;
@@ -260,6 +267,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlayDeath()
     {
+        buttonsForRespawn.SetActive(false);
+        wasRespawn = false;
         canvasTimer.enabled = false;
         autoKillEnemies = true;
         lockMovement = true;
@@ -273,8 +282,9 @@ public class PlayerController : MonoBehaviour
 
     public void PlayRespawn()
     {
-        canvasTimer.enabled = false;
         buttonsForRespawn.SetActive(true);
+        wasRespawn = true;
+        canvasTimer.enabled = false;
         lockMovement = true;
         hasRestored = false;
         playerSprite.enabled = false;
@@ -282,5 +292,11 @@ public class PlayerController : MonoBehaviour
         vp.Play();
         foreach (GameObject obj in cinemEnables) obj.SetActive(false);
         restoreAt = Time.fixedTime + (float)vp.clip.length;
+        buttonsForRespawn.SetActive(true);
+    }
+
+    public void SetReset(bool temp)
+    {
+        reset = temp;
     }
 }

@@ -21,6 +21,7 @@ public class HouseController : MonoBehaviour
     float audioTimer2, audioDelay2, audioRate2;
     private AudioSource audioSource;
     public AudioClip[] sounds;
+    public bool HasPlayedRespawn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,9 +85,14 @@ public class HouseController : MonoBehaviour
                 hasPlayedDeath = true;
                 player.PlayDeath();
             }
-            else
+            else if (!HasPlayedRespawn)
             {
                 player.PlayRespawn();
+                HasPlayedRespawn = true;
+            }
+            else
+            {
+                currentHealth = maxHealth / 2;
             }
 
 
