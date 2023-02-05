@@ -15,9 +15,13 @@ public class Saw : MonoBehaviour
 
     float innerRadius = 0.1f, outerRadius = 0.5f;
 
+    // health for enemies with slider object
+    public HealthBarBehavior healthBar;
+
     void Start()
     {
         currentDurability = maxDurability;
+        healthBar.SetHealth(currentDurability, maxDurability);
     }
 
     // Update is called once per frame
@@ -47,6 +51,8 @@ public class Saw : MonoBehaviour
         {
             currentDurability = 0;
         }
+
+        healthBar.SetHealth(currentDurability, maxDurability);
     }
 
 }

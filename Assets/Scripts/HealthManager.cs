@@ -17,7 +17,7 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthAmount = house.currentHealth;
+        //healthAmount = house.currentHealth;
         healthBar.fillAmount = healthAmount / 100f;
     }
 
