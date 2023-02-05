@@ -18,10 +18,14 @@ public class Flamethrower : MonoBehaviour
 
     private GameObject target;
 
+    // health for enemies with slider object
+    public HealthBarBehavior healthBar;
+
     void Awake()
     {
         cost = 20;
         maxDurability = 50;
+        currentDurability = 50;
     }
 
     void Start()
@@ -35,6 +39,8 @@ public class Flamethrower : MonoBehaviour
 
         innerRadius = 0.1f;
         outerRadius = 3f;
+
+        healthBar.SetHealth(currentDurability, maxDurability);
     }
 
     // Update is called once per frame
@@ -83,6 +89,8 @@ public class Flamethrower : MonoBehaviour
         {
             currentDurability = 0;
         }
+
+        healthBar.SetHealth(currentDurability, maxDurability);
     }
 
     private void OnCollisionEnter(Collision collision)

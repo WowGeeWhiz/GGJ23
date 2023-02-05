@@ -28,7 +28,7 @@ public class AIMovement : MonoBehaviour
     // health for enemies with slider object
     //public float hitpoints;
     //public float maxHitpoints;
-    public EnemyHealthBarBehavior healthBar;
+    public HealthBarBehavior healthBar;
 
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
