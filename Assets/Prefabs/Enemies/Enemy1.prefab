@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: -2517912015181310298}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   house: {fileID: 0}
   speed: 3
   attackDistance: 3
-  health: 10
+  health: 100
   stopDistanceForHouse: 2
   towerKillScore: 1
   playerKillScore: 5
@@ -215,7 +215,7 @@ MonoBehaviour:
   damageOutput: 10
   attackDelay: 2
   damageInterval: 1
-  flamethrowerPrefab: {fileID: 1266343409853037975, guid: 3c0bbc632286a5440b6751d89b241217, type: 3}
+  flamethrowerPrefab: {fileID: 1266343409853037975, guid: e43d6de32183e9c46b818511fb286be2, type: 3}
   sawPrefab: {fileID: 2906340905028683409, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
 --- !u!58 &-2517912015181310298
 CircleCollider2D:
