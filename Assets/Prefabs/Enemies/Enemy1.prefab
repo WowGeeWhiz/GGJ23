@@ -54,7 +54,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4987961769742383087
 Transform:
   m_ObjectHideFlags: 0
@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 7928755459830868362}
   - component: {fileID: 7928755459830868363}
   - component: {fileID: -2517912015181310298}
+  - component: {fileID: 1180280493052483235}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -334,8 +335,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7928755459830868360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 4.0317}
+  m_LocalPosition: {x: -0.06, y: 0.03, z: 0}
+  m_LocalScale: {x: 8.105629, y: 8.105629, z: 32.679466}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4987961769742383087}
@@ -384,15 +385,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 84b87af6448451c45a86179f9e0ccc66, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7928755459830868363
@@ -409,14 +410,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   house: {fileID: 0}
   speed: 3
-  attackDistance: 3
+  attackDistance: 7
   health: 100
-  stopDistanceForHouse: 2
+  stopDistanceForHouse: 5
   towerKillScore: 1
   playerKillScore: 5
   ignoreTowers: 0
-  damageOutput: 10
-  attackDelay: 2
+  damageOutput: 3
+  attackDelay: 10
   damageInterval: 1
   permaFlame: {fileID: 0}
   permaSaw: {fileID: 0}
@@ -453,9 +454,29 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0070953965, y: 0}
+  m_Offset: {x: 0.011928919, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.14714572
+--- !u!95 &1180280493052483235
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928755459830868360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a1c1bddf1168bf45810f7471958e6b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8790264773394030264
 GameObject:
   m_ObjectHideFlags: 0

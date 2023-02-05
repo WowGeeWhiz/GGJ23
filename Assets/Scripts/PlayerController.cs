@@ -8,11 +8,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //player variables
+    Animator animator;
     public float speed; //player movement speed
     public Collider2D leftAttack, rightAttack, upAttack, downAttack; //hitboxes for directional attacks
     public Collider2D leftUpAttack, leftDownAttack, rightUpAttack, rightDownAttack; //hitboxes for diagonal attacks
     public bool canAttack = true, lockMovement = false; //bool on if the player can currently attack (to be set false when in build menu)
     public float damage;
+    public bool GodMode;
 
     public float score;
     public TextMeshProUGUI scoreText;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         movedLeft = true;
         DisableAttacks(); //disable the attack hitboxes
         
@@ -56,13 +59,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lockMovement)
+        if (lockMovement && !GodMode)
         {
             movement = Vector2.zero;
             return;
         }
 
-        canAttack = !buildSys.buildModeActive;
+        canAttack = !buildSys.buildModeActive && !buildSys.removeModeActive;
 
         //check for current input
         Move();
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour
         if (!ignore.Equals("rightUp")) rightUpAttack.gameObject.SetActive(false);
         if (!ignore.Equals("rightDown")) rightDownAttack.gameObject.SetActive(false);
         attacking = false;
+        animator.SetBool("isAttacking", false);
     }
 
     //set the hitbox visible
@@ -108,6 +112,7 @@ public class PlayerController : MonoBehaviour
         if (movedDown) downAttack.gameObject.SetActive(true);
         //Debug.Log("Attacked but no moved is true");
         attacking = true;
+        animator.SetBool("isAttacking", true);
 
         PlayAudio(0, 7);
     }
@@ -122,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if(movement.x != 0 || movement.y != 0)
         {
+            animator.SetBool("isWalking", true);
             stepTimer -= Time.deltaTime;
             if (stepTimer <= 0)
             {
@@ -129,6 +135,10 @@ public class PlayerController : MonoBehaviour
                 PlayAudio(8, 21);
             }
 
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
 
     }

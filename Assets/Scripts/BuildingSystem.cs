@@ -12,6 +12,7 @@ public class BuildingSystem : MonoBehaviour
 
     //bool for if the build mode is active
     internal bool buildModeActive;
+    internal bool removeModeActive;
     private bool validPlacement;
 
     private PlayerController player;
@@ -31,10 +32,10 @@ public class BuildingSystem : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
-    
+
     void Update()
     {
-        if (player.lockMovement) return;
+        if (player.lockMovement && !player.GodMode) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -46,7 +47,7 @@ public class BuildingSystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
-            RemoveTower();
+            ActivateRemoveMode();
         }
 
         /*if(cursor is in bounds && not inside the radius of another structure)
@@ -54,9 +55,14 @@ public class BuildingSystem : MonoBehaviour
             validPlacement == true;
         }*/
 
-        if(buildModeActive && Input.GetMouseButtonDown(0))
+        if (buildModeActive && Input.GetMouseButtonDown(0))
         {
             Placement(structurePrefab);
+        }
+
+        if(removeModeActive && Input.GetMouseButtonDown(0))
+        {
+            RemoveTower();
         }
 
     }
@@ -70,6 +76,11 @@ public class BuildingSystem : MonoBehaviour
 
     public void ActivateBuilding(string structure)
     {
+        if (removeModeActive)
+        {
+            CancelRemoveMode();
+        }
+
         if (buildModeActive) //makes it so that if its already in build mode, pressing the button a second time will close the build mode
         {
             CancelBuildMode();
@@ -115,15 +126,48 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
+    public void ActivateRemoveMode()
+    {
+        if (buildModeActive) //makes it so that if its already in build mode, pressing the button will close the build mode
+        {
+            CancelBuildMode();
+        }
+
+        if (removeModeActive)
+        {
+            CancelRemoveMode();
+        }
+        else if (!removeModeActive)
+        {
+            removeModeActive = true;
+            //mouse cursor becomes x
+        }
+    }
+
 
     public void RemoveTower()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
+        if (hit.collider != null)
+        {
+            if(hit.collider.gameObject.tag == "Tower")
+            {
+                Destroy(hit.collider.gameObject);
+            }
+        }
     }
 
     public void CancelBuildMode()
     {
         //cancel the build mode
         buildModeActive = false;
+    }
+
+    public void CancelRemoveMode()
+    {
+        //cancel the remove mode
+        removeModeActive = false;
     }
 }
