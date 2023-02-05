@@ -365,9 +365,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
-  maxDurability: 50
+  maxDurability: 500
   currentDurability: 0
   range: 1
+  towerHealAmt: 10
+  healDelay: 0
   broken: 0
   targetInRange: 0
   isSpinning: 0

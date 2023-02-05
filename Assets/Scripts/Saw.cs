@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability, range;
+    public float cost, maxDurability, currentDurability, range, towerHealAmt, healDelay;
     public bool broken;
 
     public bool targetInRange;
     public bool isSpinning;
 
     public float attackDelay, damage, currentDamage;
-    float lastAttack;
+    float lastAttack, lastHeal;
 
     float innerRadius = 0.1f, outerRadius = 0.5f;
 
@@ -30,29 +30,55 @@ public class Saw : MonoBehaviour
         if (currentDurability <= 0) broken = true;
         else broken = false;
 
-        if (Time.fixedTime >= lastAttack + attackDelay)
+        if (!broken)
         {
-            currentDamage = damage;
-            lastAttack = Time.fixedTime;
+            if (Time.fixedTime >= lastAttack + attackDelay)
+            {
+                lastAttack = Time.deltaTime;
+                currentDamage = damage;
+            }
+            else currentDamage = 0;
         }
-        else currentDamage = 0;
     }
 
-    public void changeDurability(float amount)
+    public void changeDurability(float amount = 0)
     {
-        currentDurability += amount;
+        if (amount == 0) amount = towerHealAmt;
 
-        if (currentDurability > maxDurability)
+        if (amount > 0 && Time.deltaTime >= lastHeal + healDelay)
         {
-            currentDurability = maxDurability;
+            currentDurability += amount;
+            lastHeal = Time.deltaTime;
         }
 
-        if (currentDurability < 0)
+        if (amount < 0) currentDurability += amount;
+
+        if (currentDurability > maxDurability) currentDurability = maxDurability;
+
+        if (currentDurability <= 0)
         {
             currentDurability = 0;
+            gameObject.tag = "BrokenTower";
         }
+        else gameObject.tag = "Tower";
 
         healthBar.SetHealth(currentDurability, maxDurability);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Saw in player attackBox");
+            changeDurability();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Saw in player attackBox");
+            changeDurability();
+        }
     }
 
 }

@@ -35,7 +35,7 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-        if (player.lockMovement) return;
+        if (player.lockMovement && !player.GodMode) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
