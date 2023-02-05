@@ -12,6 +12,7 @@ public class AIMovement : MonoBehaviour
     private GameObject[] towers; 
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
+    public int woodGain;
     public bool ignoreTowers;
 
     //variables for attacking towers/house
@@ -137,6 +138,7 @@ public class AIMovement : MonoBehaviour
             if (isPlayer) player.score += playerKillScore;
             else player.score += towerKillScore;
             Destroy(gameObject);
+            player.wood++;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
