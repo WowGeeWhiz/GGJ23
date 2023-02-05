@@ -463,7 +463,7 @@ MonoBehaviour:
   towerKillScore: 5
   playerKillScore: 10
   ignoreTowers: 1
-  damageOutput: 2
+  damageOutput: 1
   attackDelay: 5
   damageInterval: 1
   permaFlame: {fileID: 0}
