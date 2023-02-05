@@ -7122,9 +7122,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4902573957032681968, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1203084716763529634, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906340905028683409, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3544703991562497040, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
       propertyPath: m_Name
@@ -15292,7 +15300,7 @@ MonoBehaviour:
   selectedObject: {fileID: 0}
   tempSelectedObject: {fileID: 0}
   sawPrefab: {fileID: 3544703991562497040, guid: 60a68db1c582d8641b23538f06db6809, type: 3}
-  flamethrowerPrefab: {fileID: 0}
+  flamethrowerPrefab: {fileID: 5984045180576778973, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
 --- !u!1 &885544861
 GameObject:
   m_ObjectHideFlags: 0
@@ -18221,6 +18229,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1266343409853037975, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5045891773174364280, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18232,6 +18244,10 @@ PrefabInstance:
     - target: {fileID: 5984045180576778973, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
       propertyPath: m_TagString
       value: permanentFlame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608082489500146521, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
+      propertyPath: m_Volume
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9034749063281480766, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
       propertyPath: m_RootOrder
@@ -31401,6 +31417,9 @@ MonoBehaviour:
   nightMinutes: 0.3
   currentTimeText: {fileID: 646458684}
   dayOrNightText: {fileID: 234247917}
+  nightTrees: {fileID: 0}
+  dayTrees: {fileID: 0}
+  nightShader: {fileID: 0}
 --- !u!114 &2052919064
 MonoBehaviour:
   m_ObjectHideFlags: 0

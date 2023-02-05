@@ -423,6 +423,13 @@ MonoBehaviour:
   permaFlame: {fileID: 0}
   permaSaw: {fileID: 0}
   healthBar: {fileID: 751493143463105675}
+  sounds:
+  - {fileID: 8300000, guid: b1a1cb597ce5db34386add51e716eed7, type: 3}
+  - {fileID: 8300000, guid: 77dc66336bc1b634c85a20b0ee1038ce, type: 3}
+  - {fileID: 8300000, guid: aa8d3788f6f04194592811dc6299a97b, type: 3}
+  - {fileID: 8300000, guid: 749bdc20f92e8c2419968927d0110798, type: 3}
+  - {fileID: 8300000, guid: 2cca707f979a8de4787dfae93ec62fd0, type: 3}
+  - {fileID: 8300000, guid: 04d364e43dd63ca489ba90f023901756, type: 3}
 --- !u!58 &-2517912015181310298
 CircleCollider2D:
   m_ObjectHideFlags: 0
