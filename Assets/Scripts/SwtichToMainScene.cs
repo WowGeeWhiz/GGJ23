@@ -14,6 +14,16 @@ public class SwtichToMainScene : MonoBehaviour
         
     }
 
+    public void playTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
+    public void playMainMenu()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+
     public void playGame()
     {
         SceneManager.LoadScene("MainScene");
