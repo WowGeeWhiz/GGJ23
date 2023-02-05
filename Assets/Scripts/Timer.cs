@@ -8,6 +8,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public bool stopTimer;
+
     //bool stopwatchActive = false;
     bool dayTimeTimer = false;
     float currentDayTime;
@@ -16,7 +18,7 @@ public class Timer : MonoBehaviour
 
     private int roundNum;
 
-    bool nightTimeTimer = false;
+    public bool nightTimeTimer = false;
     float currentNightTime;
     public float nightMinutes;
 
@@ -29,6 +31,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stopTimer = true;
         roundNum = 1;
         
         currentDayTime = dayMinutes * 60;
@@ -61,6 +64,7 @@ public class Timer : MonoBehaviour
         }
         else 
         {
+            if (nightTimeTimer == false && stopTimer == true) return;
             dayOrNightText.text = "Night";
             restoreDayTime(dayMinutes);
             currentNightTime -= Time.deltaTime;
@@ -75,7 +79,7 @@ public class Timer : MonoBehaviour
             nightTrees.SetActive(true);
             nightShader.SetActive(true);
         }
-        currentTimeText.text = time.ToString(@"mm\:ss\:fff");
+        currentTimeText.text = time.ToString(@"mm\:ss");
         //currentTimeText.text = currentTime.ToString() + ":" + time.Milliseconds.ToString();
     }
 

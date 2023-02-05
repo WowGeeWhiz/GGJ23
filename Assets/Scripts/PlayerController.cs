@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Timers;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool resetHouse = false;
+    private SpriteRenderer playerSprite;
+    public VideoClip spawn, death, respawn;
+    public VideoPlayer vp;
     //player variables
     Animator animator;
     public float speed; //player movement speed
@@ -15,6 +21,11 @@ public class PlayerController : MonoBehaviour
     public bool canAttack = true, lockMovement = false; //bool on if the player can currently attack (to be set false when in build menu)
     public float damage;
     public bool GodMode;
+    private bool hasRestored;
+    private float restoreAt;
+    public GameObject[] cinemEnables;
+
+    public bool autoKillEnemies = false;
 
     public float score;
     public TextMeshProUGUI scoreText;
@@ -36,6 +47,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerSprite = GetComponent<SpriteRenderer>();
+
         animator = GetComponent<Animator>();
         movedLeft = true;
         DisableAttacks(); //disable the attack hitboxes
@@ -54,11 +67,27 @@ public class PlayerController : MonoBehaviour
         stepTimer = 0;
         stepRate = 2f;
         stepDelay = 1 / stepRate;
+
+
+
+
+        PlaySpawn();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!hasRestored && Time.fixedTime >= restoreAt)
+        {
+            lockMovement = false;
+            playerSprite.enabled = true;
+            foreach (GameObject obj in cinemEnables) obj.SetActive(true);
+            vp.clip = null;
+            hasRestored = true;
+        }
+
+
         if (lockMovement && !GodMode)
         {
             movement = Vector2.zero;
@@ -211,5 +240,41 @@ public class PlayerController : MonoBehaviour
         int index = Random.Range(startIndex, endIndex);
         audioSource.clip = sounds[index];
         audioSource.PlayOneShot(audioSource.clip, 0.7f);
+    }
+
+    public void PlaySpawn()
+    {
+        autoKillEnemies = false;
+        lockMovement = true;
+        hasRestored = false;
+        playerSprite.enabled = false;
+        vp.clip = spawn;
+        vp.Play();
+        foreach (GameObject obj in cinemEnables) obj.SetActive(false);
+        restoreAt = Time.fixedTime + (float)vp.clip.length;
+    }
+
+    public void PlayDeath()
+    {
+        autoKillEnemies = true;
+        lockMovement = true;
+        hasRestored = false;
+        playerSprite.enabled = false;
+        vp.clip = death;
+        vp.Play();
+        foreach (GameObject obj in cinemEnables) obj.SetActive(false);
+        restoreAt = Time.fixedTime + (float)vp.clip.length;
+    }
+
+    public void PlayRespawn()
+    {
+
+        lockMovement = true;
+        hasRestored = false;
+        playerSprite.enabled = false;
+        vp.clip = respawn;
+        vp.Play();
+        foreach (GameObject obj in cinemEnables) obj.SetActive(false);
+        restoreAt = Time.fixedTime + (float)vp.clip.length;
     }
 }

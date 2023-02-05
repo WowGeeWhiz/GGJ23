@@ -135,10 +135,11 @@ public class BuildingSystem : MonoBehaviour
 
                 var tempSaw = temp.GetComponent<Saw>();
                 var tempFlame = temp.GetComponent<Flamethrower>();
-                if (tempSaw != null || tempFlame != null)
+                if (tempSaw != null)
                 {
                     tempSaw.player = player;
                 }
+                if (tempFlame != null) tempFlame.player = player;
             }
         }
     }
