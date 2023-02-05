@@ -128,11 +128,18 @@ public class AIMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             if (isPlayer) player.score += playerKillScore;
             else player.score += towerKillScore;
             player.wood += woodAwarded;
-            Destroy(gameObject);
+            animator.SetBool("isDying", true);
+            Invoke("KillEnemy",1);
         }
+    }
+
+    void KillEnemy()
+    {
+        Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
