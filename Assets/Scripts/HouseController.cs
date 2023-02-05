@@ -6,6 +6,7 @@ public class HouseController : MonoBehaviour
 {
     public float maxHealth, currentHealth;
     public PlayerController player;
+    public float healthAmt;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +24,26 @@ public class HouseController : MonoBehaviour
     {
         currentHealth -= damage;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+
+    public void HealHouse()
+    {currentHealth += healthAmt;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("House in player attackBox");
+            HealHouse();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("House in player attackBox");
+            HealHouse();
+        }
     }
 }
