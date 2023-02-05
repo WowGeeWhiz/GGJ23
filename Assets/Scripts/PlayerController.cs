@@ -9,6 +9,8 @@ using UnityEngine.Video;
 
 public class PlayerController : MonoBehaviour
 {
+    public Timer canvasTimer;
+    public GameObject buttonsForRespawn;
     public bool resetHouse = false;
     private SpriteRenderer playerSprite;
     public VideoClip spawn, death, respawn;
@@ -85,6 +87,7 @@ public class PlayerController : MonoBehaviour
             foreach (GameObject obj in cinemEnables) obj.SetActive(true);
             vp.clip = null;
             hasRestored = true;
+            canvasTimer.enabled = false;
         }
 
 
@@ -244,6 +247,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlaySpawn()
     {
+        canvasTimer.enabled = false;
         autoKillEnemies = false;
         lockMovement = true;
         hasRestored = false;
@@ -256,6 +260,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayDeath()
     {
+        canvasTimer.enabled = false;
         autoKillEnemies = true;
         lockMovement = true;
         hasRestored = false;
@@ -268,7 +273,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlayRespawn()
     {
-
+        canvasTimer.enabled = false;
+        buttonsForRespawn.SetActive(true);
         lockMovement = true;
         hasRestored = false;
         playerSprite.enabled = false;

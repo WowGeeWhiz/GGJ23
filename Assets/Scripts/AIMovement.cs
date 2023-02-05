@@ -56,7 +56,7 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player.autoKillEnemies) Destroy(this.gameObject);
+        
 
         distaceToClosestTower = Mathf.Infinity;
         GameObject closestTower = null;
@@ -64,24 +64,43 @@ public class AIMovement : MonoBehaviour
 
         foreach (GameObject currentTower in towers)
         {
-            float distanceToTower = (currentTower.transform.position - this.transform.position).sqrMagnitude;
-            if (distanceToTower < distaceToClosestTower)
+            if (player.autoKillEnemies)
             {
-                distaceToClosestTower = distanceToTower;
-                closestTower = currentTower;
-                //Debug.Log("found closest tower");
+                var tempSaw = currentTower.GetComponent<Saw>();
+                var tempFlame = currentTower.GetComponent<Flamethrower>();
+
+                if (tempSaw != null)
+                {
+                    tempSaw.BreakThis();
+                }
+                if (tempFlame != null)
+                {
+                    tempFlame.BreakThis();
+                }
             }
-            if (distanceToTower <= permaSaw.range)
+            else
             {
-                var Saw = currentTower.GetComponent<Saw>();
-                if (Saw != null) TakeDamage(permaSaw.damage);
-            }
-            if (distanceToTower <= permaFlame.range)
-            {
-                var Flame = currentTower.GetComponent<Flamethrower>();
-                if (Flame != null) TakeDamage(permaFlame.damage);
+                float distanceToTower = (currentTower.transform.position - this.transform.position).sqrMagnitude;
+                if (distanceToTower < distaceToClosestTower)
+                {
+                    distaceToClosestTower = distanceToTower;
+                    closestTower = currentTower;
+                    //Debug.Log("found closest tower");
+                }
+                if (distanceToTower <= permaSaw.range)
+                {
+                    var Saw = currentTower.GetComponent<Saw>();
+                    if (Saw != null) TakeDamage(permaSaw.damage);
+                }
+                if (distanceToTower <= permaFlame.range)
+                {
+                    var Flame = currentTower.GetComponent<Flamethrower>();
+                    if (Flame != null) TakeDamage(permaFlame.damage);
+                }
             }
         }
+
+        if (player.autoKillEnemies) Destroy(this.gameObject);
         houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
         towerDistance = Vector2.Distance(this.transform.position, closestTower.transform.position);
 

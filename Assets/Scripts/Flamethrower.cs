@@ -169,5 +169,10 @@ public class Flamethrower : MonoBehaviour
         audioSource.clip = sounds[index];
         audioSource.PlayOneShot(audioSource.clip, 0.2f);
     }
+
+    public void BreakThis()
+    {
+        changeDurability(-currentDurability);
+    }
 }
 
