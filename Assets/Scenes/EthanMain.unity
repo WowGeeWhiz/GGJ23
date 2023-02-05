@@ -21819,6 +21819,9 @@ MonoBehaviour:
   maxHealth: 10000
   currentHealth: 0
   player: {fileID: 1484298576}
+  healthAmt: 3
+  healCostInWood: 1
+  repeatsPerCost: 12
 --- !u!60 &585479966
 PolygonCollider2D:
   m_ObjectHideFlags: 0
