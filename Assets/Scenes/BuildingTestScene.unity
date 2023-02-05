@@ -18358,6 +18358,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: permanentFlame
       objectReference: {fileID: 0}
+    - target: {fileID: 7325332871448638015, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8608082489500146521, guid: 8154da0db78fb794c8da1b9ce6db79c1, type: 3}
       propertyPath: m_Volume
       value: 0
@@ -31961,12 +31965,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312e4f48f3d4b5d4582406061c62f1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100000
   currentHealth: 0
   player: {fileID: 871307115}
   healthAmt: 0
-  healCostInWood: 0
-  repeatsPerCost: 0
+  healCostInWood: 1
+  repeatsPerCost: 12
   house: {fileID: 0}
   damagedHouse: {fileID: 0}
   sounds:
