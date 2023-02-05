@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability, range, towerHealAmt, healDelay;
+    public float cost, maxDurability, currentDurability, range, towerHealAmt, healCostInWood;
     public bool broken;
+
+    public int repeatsPerCost;
+    private int repeatsLeft;
+
+    public PlayerController player;
 
     public bool targetInRange;
     public bool isSpinning;
 
     public float attackDelay, damage, currentDamage;
-    float lastAttack, lastHeal;
+    float lastAttack;
 
     float lastCheckedDurability;
     float audioTimer, audioDelay, audioRate;
@@ -26,9 +32,11 @@ public class Saw : MonoBehaviour
 
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
+    public TextMeshProUGUI sawCost;
 
     void Start()
     {
+        if (gameObject.CompareTag("permanentSaw")) sawCost.text = cost.ToString();
         currentDurability = maxDurability;
         healthBar.SetHealth(currentDurability, maxDurability);
 
@@ -106,13 +114,7 @@ public class Saw : MonoBehaviour
     {
         if (amount == 0) amount = towerHealAmt;
 
-        if (amount > 0 && Time.deltaTime >= lastHeal + healDelay)
-        {
-            currentDurability += amount;
-            lastHeal = Time.deltaTime;
-        }
-
-        if (amount < 0) currentDurability += amount;
+        currentDurability += amount;
 
         if (currentDurability > maxDurability) currentDurability = maxDurability;
 
@@ -129,16 +131,32 @@ public class Saw : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Saw in player attackBox");
-            changeDurability();
+            if (player.wood >= healCostInWood && currentDurability != maxDurability)
+            {
+                if (repeatsLeft <= 0)
+                {
+                    repeatsLeft = repeatsPerCost;
+                    player.wood -= (int)healCostInWood;
+                }
+                changeDurability();
+                repeatsLeft--;
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            Debug.Log("Saw in player attackBox");
-            changeDurability();
+            if (player.wood >= healCostInWood && currentDurability != maxDurability)
+            {
+                if (repeatsLeft <= 0)
+                {
+                    repeatsLeft = repeatsPerCost;
+                    player.wood -= (int)healCostInWood;
+                }
+                changeDurability();
+                repeatsLeft--;
+            }
         }
     }
 

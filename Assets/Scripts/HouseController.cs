@@ -96,7 +96,7 @@ public class HouseController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("attackBox"))
         {
-            if (player.wood >= healCostInWood)
+            if (player.wood >= healCostInWood && currentHealth != maxHealth)
             {
                 //Debug.Log("House in player attackBox and has enough to repair");
                 

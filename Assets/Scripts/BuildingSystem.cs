@@ -129,8 +129,16 @@ public class BuildingSystem : MonoBehaviour
             else if (structureCost <= material)
             {
                 //Destroy(tempObject);
-                Instantiate(structurePrefab, GetMousePos(), Quaternion.identity);
+               GameObject temp = Instantiate(structurePrefab, GetMousePos(), Quaternion.identity);
                 player.wood -= (int)structureCost;
+
+
+                var tempSaw = temp.GetComponent<Saw>();
+                var tempFlame = temp.GetComponent<Flamethrower>();
+                if (tempSaw != null || tempFlame != null)
+                {
+                    tempSaw.player = player;
+                }
             }
         }
     }
