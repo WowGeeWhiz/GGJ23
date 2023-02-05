@@ -411,8 +411,8 @@ MonoBehaviour:
   house: {fileID: 0}
   speed: 3
   attackDistance: 7
-  health: 100
-  stopDistanceForHouse: 5
+  health: 
+  stopDistanceForHouse: 6
   towerKillScore: 1
   playerKillScore: 5
   ignoreTowers: 0

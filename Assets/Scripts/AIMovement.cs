@@ -98,10 +98,8 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
-            if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
-            //animator.SetBool("IsMoving", false);
         }
-        else if (houseDistance < attackDistance)
+        else if (houseDistance < stopDistanceForHouse)
         {
             animator.SetBool("IsMoving", false);
             house.SendMessage("TakeDamage", damageOutput);
