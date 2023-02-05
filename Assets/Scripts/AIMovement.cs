@@ -14,6 +14,7 @@ public class AIMovement : MonoBehaviour
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
+    public int woodAwarded;
 
     //variables for attacking towers/house
     public float damageOutput, attackDelay;
@@ -125,6 +126,7 @@ public class AIMovement : MonoBehaviour
         {
             if (isPlayer) player.score += playerKillScore;
             else player.score += towerKillScore;
+            player.wood += woodAwarded;
             Destroy(gameObject);
         }
     }
