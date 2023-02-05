@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class HouseController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HouseController : MonoBehaviour
     public float healthAmt, healCostInWood;
     private int repeatsLeft;
     public int repeatsPerCost;
+    public bool hasPlayedDeath;
 
     public Sprite house, damagedHouse;
     SpriteRenderer renderer;
@@ -68,6 +70,10 @@ public class HouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.resetHouse)
+        {
+            currentHealth = maxHealth / 2;
+        }
         if (currentHealth <= 0)
         {
             player.lockMovement = true;
@@ -75,6 +81,14 @@ public class HouseController : MonoBehaviour
             if (player.score > PlayerPrefs.GetFloat("highscore"))
             {
                 PlayerPrefs.SetFloat("highscore", player.score);
+            if (!hasPlayedDeath)
+            {
+                hasPlayedDeath = true;
+                player.PlayDeath();
+            }
+            else
+            {
+                player.PlayRespawn();
             }
         }
         else

@@ -36,7 +36,7 @@ public class Saw : MonoBehaviour
 
     void Start()
     {
-        if (gameObject.CompareTag("permanentSaw")) sawCost.text = cost.ToString();
+        //if (gameObject.CompareTag("permanentSaw")) sawCost.text = cost.ToString();
         currentDurability = maxDurability;
         healthBar.SetHealth(currentDurability, maxDurability);
 

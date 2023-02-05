@@ -36,6 +36,7 @@ public class AIMovement : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip[] sounds;
 
+    private bool hasAwardred;
     private float towerDistance, distaceToClosestTower, currentHealth, houseDistance;
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,8 @@ public class AIMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (player.autoKillEnemies) Destroy(this.gameObject);
+
         distaceToClosestTower = Mathf.Infinity;
         GameObject closestTower = null;
         towers = GameObject.FindGameObjectsWithTag("Tower");
@@ -131,7 +134,11 @@ public class AIMovement : MonoBehaviour
 
             if (isPlayer) player.score += playerKillScore;
             else player.score += towerKillScore;
-            player.wood += woodAwarded;
+            if (!hasAwardred)
+            {
+                hasAwardred = true;
+                player.wood += woodAwarded;
+            }
             animator.SetBool("isDying", true);
             Invoke("KillEnemy",1);
         }

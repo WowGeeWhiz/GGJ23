@@ -1079,10 +1079,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1962dea87d1824dbb3dbd58f6f53f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0
+  cost: 200
   maxDurability: 2000
   currentDurability: 0
-  range: 3
+  range: 7
   attackDelay: 1
   damage: 3
   currentDamage: 0
