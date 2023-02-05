@@ -8,11 +8,11 @@ using UnityEngine.UIElements;
 
 public class AIMovement : MonoBehaviour
 {
+    Animator animator;
     public GameObject house;
     private GameObject[] towers; 
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
-    public int woodGain;
     public bool ignoreTowers;
 
     //variables for attacking towers/house
@@ -35,12 +35,15 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
 
         //hitpoints = maxHitpoints;
         healthBar.SetHealth(currentHealth, health);
+
+
 
     }
 
@@ -86,11 +89,7 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, closestTower.transform.position, speed * Time.deltaTime);
             var flame = closestTower.GetComponent<Flamethrower>();
             var saw = closestTower.GetComponent<Saw>();
-            if (flame != null || saw != null)
-            {
-                    Debug.Log("Enemy attacked tower");
-                    closestTower.SendMessage("changeDurability", -damageOutput);
-            }
+            if (flame != null || saw != null) closestTower.SendMessage("changeDurability", -damageOutput);
         }
 
         //move towards house
@@ -99,22 +98,13 @@ public class AIMovement : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, house.transform.position, speed * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 
-            if (houseDistance < attackDistance)
-            {
-                if (Time.deltaTime <= lastAttack + attackDelay)
-                {
-                    house.SendMessage("TakeDamage", damageOutput);
-                    lastAttack = Time.deltaTime;
-                }
-            }
+            if (houseDistance < attackDistance) house.SendMessage("TakeDamage", damageOutput);
+            //animator.SetBool("IsMoving", false);
         }
         else if (houseDistance < attackDistance)
         {
-            if (Time.deltaTime <= lastAttack + attackDelay)
-            {
-                house.SendMessage("TakeDamage", damageOutput);
-                lastAttack = Time.deltaTime;
-            }
+            animator.SetBool("IsMoving", false);
+            house.SendMessage("TakeDamage", damageOutput);
         }
 
 
@@ -127,10 +117,10 @@ public class AIMovement : MonoBehaviour
     }
     public void TakeDamage(float damage, bool isPlayer = false)
     {
-        //if (!isPlayer) Debug.Log($"Taking {damage} from tower");
+        if (!isPlayer) Debug.Log($"Taking {damage} from tower");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth, health);
-        //Debug.Log("enemy health: " + currentHealth);
+        Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
         if (currentHealth <= 0)
@@ -138,7 +128,6 @@ public class AIMovement : MonoBehaviour
             if (isPlayer) player.score += playerKillScore;
             else player.score += towerKillScore;
             Destroy(gameObject);
-            player.wood++;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -151,6 +140,7 @@ public class AIMovement : MonoBehaviour
         }
 
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("attackBox"))
