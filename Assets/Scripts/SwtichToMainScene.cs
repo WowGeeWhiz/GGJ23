@@ -35,6 +35,11 @@ public class SwtichToMainScene : MonoBehaviour
         SceneManager.LoadScene("CreditsScene");
     }
 
+    public void playHighScore()
+    {
+        SceneManager.LoadScene("HighScoreScene");
+    }
+
     public void QuitGame()
     {
         EditorApplication.ExitPlaymode();
