@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     Collider2D col; //player hitbox
     BuildingSystem buildSys; //building controls
 
+    float stepTimer, stepDelay, stepRate;
+    private AudioSource audioSource;
+    public AudioClip[] sounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Startup Complete");
 
         score = 0;
+
+        audioSource = GetComponent<AudioSource>();
+
+        stepTimer = 0;
+        stepRate = 2f;
+        stepDelay = 1 / stepRate;
     }
 
     // Update is called once per frame
@@ -93,6 +103,8 @@ public class PlayerController : MonoBehaviour
         if (movedDown) downAttack.gameObject.SetActive(true);
         //Debug.Log("Attacked but no moved is true");
         attacking = true;
+
+        PlayAudio(0, 7);
     }
 
     private void FixedUpdate()
@@ -102,6 +114,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift)) rb.MovePosition(rb.position + movement * speed * 0 * Time.fixedDeltaTime);
         //this is normal movement speed
         else rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+
+        if(movement.x != 0 || movement.y != 0)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0)
+            {
+                stepTimer = stepDelay;
+                PlayAudio(8, 21);
+            }
+
+        }
+
     }
 
     //set the movement Vector2 and the directional bools
@@ -165,5 +189,12 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+    }
+
+    public void PlayAudio(int startIndex, int endIndex)
+    {
+        int index = Random.Range(startIndex, endIndex);
+        audioSource.clip = sounds[index];
+        audioSource.PlayOneShot(audioSource.clip, 0.7f);
     }
 }
