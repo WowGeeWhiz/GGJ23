@@ -459,12 +459,12 @@ MonoBehaviour:
   house: {fileID: 0}
   speed: 5
   attackDistance: 7
-  health: 50
+  health: 20
   stopDistanceForHouse: 6
   towerKillScore: 5
   playerKillScore: 10
   ignoreTowers: 1
-  woodAwarded: 20
+  woodAwarded: 15
   damageOutput: 1
   attackDelay: 5
   damageInterval: 1
