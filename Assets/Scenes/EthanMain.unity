@@ -59105,6 +59105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eb05f6dc7d09d40b49c478735018a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sawCursor: {fileID: 2800000, guid: 3d1effb4e2d36f84481b9052b95ace68, type: 3}
+  flameCursor: {fileID: 2800000, guid: 9d4e3bc513a159c45bf99537dbb7b14d, type: 3}
+  cancelCursor: {fileID: 2800000, guid: ff44ac6311ccbea4d8488b2b76585836, type: 3}
+  normalCursor: {fileID: 2800000, guid: ff44ac6311ccbea4d8488b2b76585836, type: 3}
   objectToPlace: {fileID: 0}
   tempObject: {fileID: 0}
   selectedObject: {fileID: 0}
