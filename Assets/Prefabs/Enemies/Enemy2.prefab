@@ -272,12 +272,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6817482503349420850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddc11f53e13d324aa4a732a6bab0556, type: 3}
+  m_Script: {fileID: 11500000, guid: 775c9061a2597374a8ca7da6426ac66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1971396827749584886}
-  low: {r: 1, g: 0, b: 0, a: 1}
-  high: {r: 0.113589525, g: 1, b: 0, a: 1}
+  low: {r: 1, g: 0.14632367, b: 0, a: 0.8666667}
+  high: {r: 0, g: 1, b: 0.038214684, a: 0.7372549}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &6999818677430951152
 GameObject:
@@ -466,8 +466,8 @@ MonoBehaviour:
   damageOutput: 2
   attackDelay: 1
   damageInterval: 1
-  flamethrowerPrefab: {fileID: 0}
-  sawPrefab: {fileID: 0}
+  permaFlame: {fileID: 0}
+  permaSaw: {fileID: 0}
   healthBar: {fileID: 1308074713988002935}
 --- !u!58 &4552781516632965907
 CircleCollider2D:
