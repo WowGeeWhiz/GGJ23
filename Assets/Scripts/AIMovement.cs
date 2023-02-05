@@ -34,6 +34,8 @@ public class AIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject GetSaw = GameObject.FindGameObjectWithTag("permanentSaw");
+        sawPrefab = GetSaw.GetComponent<Saw>();
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         player = temp.GetComponent<PlayerController>();
         currentHealth = health;
@@ -44,7 +46,7 @@ public class AIMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         distaceToClosestTower = Mathf.Infinity;
         GameObject closestTower = null;
@@ -58,6 +60,11 @@ public class AIMovement : MonoBehaviour
                 distaceToClosestTower = distanceToTower;
                 closestTower = currentTower;
                 //Debug.Log("found closest tower");
+            }
+            if (distanceToTower <= sawPrefab.range)
+            {
+                var Saw = currentTower.GetComponent<Saw>();
+                if (Saw != null) TakeDamage(sawPrefab.damage);
             }
         }
         houseDistance = Vector2.Distance(this.gameObject.transform.position, house.transform.position);
@@ -94,8 +101,9 @@ public class AIMovement : MonoBehaviour
         //    transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         //}
     }
-    void TakeDamage(float damage, bool isPlayer = false)
+    public void TakeDamage(float damage, bool isPlayer = false)
     {
+        if (!isPlayer) Debug.Log($"Taking {damage} from tower");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth, health);
         Debug.Log("enemy health: " + currentHealth);
@@ -116,16 +124,10 @@ public class AIMovement : MonoBehaviour
             TakeDamage(player.damage, true);
 
         }
-        else if (collision.gameObject.CompareTag("sawAttackBox"))
-        {
-            Debug.Log("Saw hit enemy");
-            TakeDamage(sawPrefab.damage, true);
-
-        }
-        else if (collision.gameObject.CompareTag("fireAttackBox"))
+        if (collision.gameObject.CompareTag("fireAttackBox"))
         {
             Debug.Log("Fire hit enemy");
-            TakeDamage(flamethrowerPrefab.damage, true);
+            TakeDamage(flamethrowerPrefab.damage);
 
         }
 
@@ -141,20 +143,12 @@ public class AIMovement : MonoBehaviour
                 TakeDamage(player.damage, true);
             }
         }
-        else if (collision.gameObject.CompareTag("sawAttackBox"))
-        {
-            if (Time.fixedTime - damageInterval >= lastDamage)
-            {
-                Debug.Log("Enemy stayed in saw");
-                TakeDamage(sawPrefab.damage, true);
-            }
-        }
-        else if (collision.gameObject.CompareTag("fireAttackBox"))
+        if (collision.gameObject.CompareTag("fireAttackBox"))
         {
             if (Time.fixedTime - damageInterval >= lastDamage)
             {
                 Debug.Log("Enemy stayed in fire");
-                TakeDamage(flamethrowerPrefab.damage, true);
+                TakeDamage(flamethrowerPrefab.damage);
             }
         }
 
@@ -174,7 +168,7 @@ public class AIMovement : MonoBehaviour
 
         if (targetIsSaw)
         {
-            Debug.Log("Enemy attacked saw");
+            //Debug.Log("Enemy attacked saw");
             Tower.GetComponent<Saw>().changeDurability(damageOutput);
             //saw.changeDurability(damageOutput);
             lastAttack = Time.fixedTime;
@@ -183,7 +177,7 @@ public class AIMovement : MonoBehaviour
         if (targetIsFlamethrower)
         {
             Flamethrower flame = Tower.GetComponent<Flamethrower>();
-            //flame.changeDurability(damageOutput);
+            flame.changeDurability(damageOutput);
             lastAttack = Time.fixedTime;
             return;
         }

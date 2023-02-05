@@ -11,6 +11,8 @@ TagManager:
   - workingHous
   - fireAttackBox
   - sawAttackBox
+  - Enemy
+  - permanentSaw
   layers:
   - Default
   - TransparentFX

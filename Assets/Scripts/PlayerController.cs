@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         if (movedRightDown) rightDownAttack.gameObject.SetActive(true);
         if (movedUp) upAttack.gameObject.SetActive(true);
         if (movedDown) downAttack.gameObject.SetActive(true);
-        Debug.Log("Attacked but no moved is true");
+        //Debug.Log("Attacked but no moved is true");
         attacking = true;
     }
 
