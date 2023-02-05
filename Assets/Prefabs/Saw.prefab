@@ -560,7 +560,7 @@ MonoBehaviour:
   cost: 0
   maxDurability: 1250
   currentDurability: 0
-  range: 2
+  range: 5
   towerHealAmt: 10
   healCostInWood: 1
   broken: 0

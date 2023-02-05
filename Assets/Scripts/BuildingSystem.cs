@@ -139,7 +139,7 @@ public class BuildingSystem : MonoBehaviour
                 {
                     tempSaw.player = player;
                 }
-                if (tempFlame != null) tempFlame.player = player;
+                else if (tempFlame != null) tempFlame.player = player;
             }
         }
     }
