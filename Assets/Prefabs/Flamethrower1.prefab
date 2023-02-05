@@ -593,12 +593,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7820565165746855666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775c9061a2597374a8ca7da6426ac66b, type: 3}
+  m_Script: {fileID: 11500000, guid: d8c9067ade72faf4e808830afc66854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 970856306085046862}
-  low: {r: 1, g: 0, b: 0, a: 0.8039216}
-  high: {r: 0, g: 1, b: 0.029061556, a: 0.91764706}
+  low: {r: 1, g: 0, b: 0.009400845, a: 1}
+  high: {r: 0.16824007, g: 1, b: 0, a: 1}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &8195628491343249795
 GameObject:
