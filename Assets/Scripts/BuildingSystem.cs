@@ -8,6 +8,8 @@ public class BuildingSystem : MonoBehaviour
 
     Camera cam;
 
+    public Texture2D sawCursor, flameCursor, cancelCursor, normalCursor;
+
     float material; //the amount of building material the player has
 
     //bool for if the build mode is active
@@ -27,6 +29,7 @@ public class BuildingSystem : MonoBehaviour
 
     void Start()
     {
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         cam = Camera.main;
 
         validPlacement = true;
@@ -98,10 +101,12 @@ public class BuildingSystem : MonoBehaviour
                 case "saw":
                     structurePrefab = sawPrefab;
                     structureCost = permaSaw.cost;
+                    Cursor.SetCursor(sawCursor, Vector2.zero, CursorMode.Auto);
                     break;
                 case "flamethrower":
                     structurePrefab = flamethrowerPrefab;
                     structureCost = permaFlame.cost;
+                    Cursor.SetCursor(flameCursor, Vector2.zero, CursorMode.Auto);
                     break;
             }
             /*mouse cursor becomes tempObject
@@ -144,6 +149,7 @@ public class BuildingSystem : MonoBehaviour
         else if (!removeModeActive)
         {
             removeModeActive = true;
+            Cursor.SetCursor(cancelCursor, Vector2.zero, CursorMode.Auto);
             //mouse cursor becomes x
         }
     }
@@ -167,6 +173,7 @@ public class BuildingSystem : MonoBehaviour
     {
         //cancel the build mode
         buildModeActive = false;
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
     }
 
     public void CancelRemoveMode()

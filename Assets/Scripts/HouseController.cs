@@ -10,9 +10,14 @@ public class HouseController : MonoBehaviour
     private int repeatsLeft;
     public int repeatsPerCost;
 
+    public Sprite house, damagedHouse;
+    SpriteRenderer renderer;
+
     // Start is called before the first frame update
     void Start()
     {
+        renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite = house;
         currentHealth = maxHealth;
         repeatsLeft = repeatsPerCost;
     }
@@ -20,7 +25,16 @@ public class HouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth <= 0) player.lockMovement = true;
+        if (currentHealth <= 0)
+        {
+            player.lockMovement = true;
+            renderer.sprite = damagedHouse;
+        }
+        else
+        {
+            player.lockMovement = false;
+            renderer.sprite = house;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -29,9 +43,10 @@ public class HouseController : MonoBehaviour
         if (currentHealth > maxHealth) currentHealth = maxHealth;
     }
 
-    public void HealHouse()
+    public void HealHouse(float replaceValue = 0)
     {
-        currentHealth += healthAmt;
+        if (replaceValue != 0) currentHealth += replaceValue;
+        else currentHealth += healthAmt;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SwtichToMainScene : MonoBehaviour
 {
+    public Texture2D normalCursor;
 
     SceneManager sceneManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
     }
 
     public void playGame()
