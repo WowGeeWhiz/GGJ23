@@ -13,11 +13,23 @@ public class Flamethrower : MonoBehaviour
     // health for enemies with slider object
     public HealthBarBehavior healthBar;
 
+    float audioTimer, audioDelay, audioRate;
+    private AudioSource audioSource;
+    public AudioClip[] sounds;
+
     void Start()
     {
         currentDurability = maxDurability;
 
         healthBar.SetHealth(currentDurability, maxDurability);
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = sounds[0];
+
+        audioTimer = 0;
+        audioRate = audioSource.clip.length;
+        audioDelay = audioSource.clip.length;
+
     }
 
     // Update is called once per frame
@@ -34,6 +46,17 @@ public class Flamethrower : MonoBehaviour
                 currentDamage = damage;
             }
             else currentDamage = 0;
+
+            audioTimer -= Time.deltaTime;
+            if (audioTimer <= 0)
+            {
+                audioTimer = audioDelay;
+                PlayAudio(0, 0);
+            }
+        }
+        else if (broken)
+        {
+            audioSource.Stop();
         }
         //else this.gameObject.SetActive(false);
     }
@@ -79,5 +102,10 @@ public class Flamethrower : MonoBehaviour
     }
 
 
-
+    public void PlayAudio(int startIndex, int endIndex)
+    {
+        int index = Random.Range(startIndex, endIndex);
+        audioSource.clip = sounds[index];
+        audioSource.PlayOneShot(audioSource.clip, 0.2f);
+    }
 }
