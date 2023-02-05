@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public float score;
     public TextMeshProUGUI scoreText;
 
+    public int wood;
+    public TextMeshProUGUI woodText;
+
     bool attacking = false; //private bool for currently attacking
     bool movedUp, movedDown, movedLeft, movedRight, movedLeftUp, movedLeftDown, movedRightUp, movedRightDown; //directional bools
     Vector2 movement; //variable for not moving
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Startup Complete");
 
         score = 0;
+        wood = 0;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -70,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
 
         scoreText.text = "Score: " + score.ToString();
+        woodText.text  = wood.ToString();
     }
 
     //set the hitboxes invisible
