@@ -87,11 +87,8 @@ public class AIMovement : MonoBehaviour
             var saw = closestTower.GetComponent<Saw>();
             if (flame != null || saw != null)
             {
-                if (Time.deltaTime >= lastAttack + attackDelay)
-                {
+                    Debug.Log("Enemy attacked tower");
                     closestTower.SendMessage("changeDurability", -damageOutput);
-                    lastAttack = Time.deltaTime;
-                }
             }
         }
 
@@ -129,10 +126,10 @@ public class AIMovement : MonoBehaviour
     }
     public void TakeDamage(float damage, bool isPlayer = false)
     {
-        if (!isPlayer) Debug.Log($"Taking {damage} from tower");
+        //if (!isPlayer) Debug.Log($"Taking {damage} from tower");
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth, health);
-        Debug.Log("enemy health: " + currentHealth);
+        //Debug.Log("enemy health: " + currentHealth);
         lastDamage = Time.fixedTime;
 
         if (currentHealth <= 0)

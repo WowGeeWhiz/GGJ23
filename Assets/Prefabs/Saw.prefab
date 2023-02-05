@@ -367,6 +367,8 @@ MonoBehaviour:
   maxDurability: 50
   currentDurability: 0
   range: 1
+  towerHealAmt: 10
+  healDelay: 1
   broken: 0
   targetInRange: 0
   isSpinning: 0

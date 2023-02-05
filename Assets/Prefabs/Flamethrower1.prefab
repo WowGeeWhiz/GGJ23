@@ -405,6 +405,8 @@ MonoBehaviour:
   attackDelay: 1
   damage: 3
   currentDamage: 0
+  towerHealAmt: 20
+  healDelay: 1
   broken: 0
   pivot: {fileID: 1638049263281165594}
   buildingRadius: {fileID: 1142679469288809804}

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability, range;
+    public float cost, maxDurability, currentDurability, range, towerHealAmt, healDelay;
     public bool broken;
 
     public bool targetInRange;
     public bool isSpinning;
 
     public float attackDelay, damage, currentDamage;
-    float lastAttack;
+    float lastAttack, lastHeal;
 
     float innerRadius = 0.1f, outerRadius = 0.5f;
 
@@ -38,9 +38,17 @@ public class Saw : MonoBehaviour
         else currentDamage = 0;
     }
 
-    public void changeDurability(float amount)
+    public void changeDurability(float amount = 0)
     {
-        currentDurability += amount;
+        if (amount == 0) amount = towerHealAmt;
+
+        if (amount > 0 && Time.deltaTime >= lastHeal + healDelay)
+        {
+            currentDurability += amount;
+            lastHeal = Time.deltaTime;
+        }
+
+        if (amount < 0) currentDurability += amount;
 
         if (currentDurability > maxDurability)
         {
@@ -53,6 +61,23 @@ public class Saw : MonoBehaviour
         }
 
         healthBar.SetHealth(currentDurability, maxDurability);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Saw in player attackbox");
+            changeDurability();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Saw in player attackbox");
+            changeDurability();
+        }
     }
 
 }

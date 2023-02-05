@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    public float cost, maxDurability, currentDurability, range, attackDelay, damage, currentDamage;
+    public float cost, maxDurability, currentDurability, range, attackDelay, damage, currentDamage, towerHealAmt, healDelay;
     public bool broken;
-    float lastAttack;
+    float lastAttack, lastHeal;
 
     public GameObject pivot, buildingRadius;
 
@@ -38,9 +38,17 @@ public class Flamethrower : MonoBehaviour
         else this.gameObject.SetActive(false);
     }
 
-    public void changeDurability(float amount)
+    public void changeDurability(float amount = 0)
     {
-        currentDurability += amount;
+        if (amount == 0) amount = towerHealAmt;
+
+        if (amount > 0 && Time.deltaTime >= lastHeal + healDelay)
+        {
+            currentDurability += amount;
+            lastHeal = Time.deltaTime;
+        }
+
+        if (amount < 0) currentDurability += amount;
 
         if (currentDurability > maxDurability)
         {
@@ -54,7 +62,23 @@ public class Flamethrower : MonoBehaviour
 
         healthBar.SetHealth(currentDurability, maxDurability);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Flame in player attackBox");
+            changeDurability();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("attackBox"))
+        {
+            Debug.Log("Flame in player attackBox");
+            changeDurability();
+        }
+    }
 
-   
+
 
 }
