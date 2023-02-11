@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
@@ -10,7 +10,7 @@ public class HouseController : MonoBehaviour
     public float healthAmt, healCostInWood;
     private int repeatsLeft;
     public int repeatsPerCost;
-    public bool hasPlayedDeath;
+    public bool hasPlayedDeath = false;
 
     public Sprite house, damagedHouse;
     SpriteRenderer renderer;
@@ -74,43 +74,30 @@ public class HouseController : MonoBehaviour
         if (player.resetHouse)
         {
             currentHealth = maxHealth / 2;
+            player.lockMovement = false;
+            player.resetHouse = false;
+            player.score = 0;
+            player.wood = 0;
+            hasPlayedDeath = HasPlayedRespawn = false;
         }
         if (currentHealth <= 0)
         {
             player.lockMovement = true;
             renderer.sprite = damagedHouse;
             if (player.score > PlayerPrefs.GetFloat("highscore")) PlayerPrefs.SetFloat("highscore", player.score);
+
             if (!hasPlayedDeath)
             {
-
                 hasPlayedDeath = true;
                 player.PlayDeath();
-                if (player.score > PlayerPrefs.GetFloat("highscore"))
-                {
-                    PlayerPrefs.SetFloat("highscore", player.score);
-                }
-                if (!hasPlayedDeath)
-                {
-                    hasPlayedDeath = true;
-                    player.PlayDeath();
-                }
-                else if (!HasPlayedRespawn)
-                {
-                    player.PlayRespawn();
-                }
-
-
-                else if (!HasPlayedRespawn)
-                {
-                    player.PlayRespawn();
-                    HasPlayedRespawn = true;
-                    player.lockMovement = false;
-                    renderer.sprite = house;
-                }
-                else
-                {
-                    currentHealth = maxHealth / 2;
-                }
+            }
+            else if (!HasPlayedRespawn)
+            {
+                player.PlayRespawn();
+                HasPlayedRespawn = true;
+                player.lockMovement = false;
+                renderer.sprite = house;
+                player.resetHouse = true;
             }
 
         }

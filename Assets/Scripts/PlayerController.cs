@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
             foreach (GameObject obj in cinemEnables) obj.SetActive(true);
             vp.clip = null;
             hasRestored = true;
-            canvasTimer.enabled = false;
+            canvasTimer.enabled = true;
             if (wasRespawn) PlaySpawn();
         }
 

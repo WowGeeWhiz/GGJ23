@@ -10,7 +10,8 @@ public class AIMovement : MonoBehaviour
 {
     Animator animator;
     public GameObject house;
-    private GameObject[] towers; 
+    private GameObject[] towers;
+    private GameObject[] brokenTowers;
     public float speed, attackDistance, health, stopDistanceForHouse;
     public int towerKillScore, playerKillScore;
     public bool ignoreTowers;
@@ -61,6 +62,29 @@ public class AIMovement : MonoBehaviour
         distaceToClosestTower = Mathf.Infinity;
         GameObject closestTower = null;
         towers = GameObject.FindGameObjectsWithTag("Tower");
+        brokenTowers = GameObject.FindGameObjectsWithTag("BrokenTower");
+
+        if (player.autoKillEnemies)
+        {
+            foreach (GameObject bTower in brokenTowers)
+            {
+                var tempSaw = bTower.GetComponent<Saw>();
+                var tempFlame = bTower.GetComponent<Flamethrower>();
+
+                if (tempSaw != null)
+                {
+                    tempSaw.BreakThis();
+                    player.cinemEnables.Add(bTower);
+                    bTower.SetActive(false);
+                }
+                if (tempFlame != null)
+                {
+                    tempFlame.BreakThis();
+                    player.cinemEnables.Add(bTower);
+                    bTower.SetActive(false);
+                }
+            }
+        }
 
         foreach (GameObject currentTower in towers)
         {
