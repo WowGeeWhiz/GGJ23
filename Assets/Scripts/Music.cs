@@ -81,7 +81,7 @@ public class Music : MonoBehaviour
                         audioSource.Stop();
                         audioTimer = 0;
 
-                        audioSource.clip = sounds[0];
+                        audioSource.clip = sounds[1];
                         audioDelay = audioSource.clip.length;
 
                         audioTimer -= Time.deltaTime;
@@ -96,7 +96,7 @@ public class Music : MonoBehaviour
                         audioSource.Stop();
                         audioTimer = 0;
 
-                        audioSource.clip = sounds[1];
+                        audioSource.clip = sounds[0];
                         audioDelay = audioSource.clip.length;
 
                         audioTimer -= Time.deltaTime;
