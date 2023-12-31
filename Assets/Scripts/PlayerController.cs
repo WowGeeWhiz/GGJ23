@@ -5,6 +5,7 @@ using System.Timers;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class PlayerController : MonoBehaviour
@@ -156,6 +157,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Input.GetKey(KeyCode.Escape)) SceneManager.LoadScene("StartScreen");
+
         //apply movement Vector2 to transform at fixed rate
         //this is for turning without moving
         if (Input.GetKey(KeyCode.LeftShift)) rb.MovePosition(rb.position + movement * speed * 0 * Time.fixedDeltaTime);
